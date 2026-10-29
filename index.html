@@ -1,1 +1,998 @@
-PLACEHOLDER_CONTENT
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Colabs de @pauliiguerra, seguimiento de marcas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7EFE4; --surface:#FFFDF9; --track:#EADFCF; --ink:#18212B; --muted:#646B75; --line:rgba(24,33,43,.11);
+  --pink:#DF3F80; --strong-pink:#C42B6A; --teal:#1B95A0; --teal-soft:#D3ECED;
+  --night:#18212B; --on-night:#F7EFE4; --on-night-muted:rgba(247,239,228,.72);
+  --st-p:#CDBFAE; --st-cp:#8A5CC2; --st-cr:#1B95A0; --st-yc:#3D9A5B; --st-ni:#8C5B3E;
+  --warn-soft:#FBE7C9; --warn-ink:#7A4A06;
+  --font:"Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#10161D; --surface:#19222C; --track:#2A3440; --ink:#F2EADF; --muted:#A7AEB7; --line:rgba(242,234,223,.12);
+    --pink:#F0659E; --teal:#3BB3BD; --teal-soft:#15373B;
+    --night:#0A0F14; --on-night:#F2EADF; --on-night-muted:rgba(242,234,223,.72);
+    --st-p:#566170; --st-cp:#B395EA; --st-cr:#3BB3BD; --st-yc:#6CC788; --st-ni:#C08A66;
+    --warn-soft:#3D2E14; --warn-ink:#F3CB86;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+button,input,select{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:8px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:20px;padding-right:20px}
+.section{padding-top:60px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;margin-bottom:20px}
+.sec-head h2{font-size:clamp(1.7rem,4.4vw,2.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.08}
+.sec-head p{color:var(--muted);font-size:.95rem;max-width:52ch}
+h3{font-size:1.02rem;font-weight:600;line-height:1.3}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px}
+.card-night{background:var(--night);color:var(--on-night)}
+.hint{color:var(--muted);font-size:.84rem;margin-top:2px}
+.card-night .hint{color:var(--on-night-muted)}
+.grid-2{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+@media (min-width:880px){.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-2.wide-left{grid-template-columns:1.35fr 1fr}}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
+
+/* Cabecera */
+.top{padding-top:30px}
+.top h1{font-size:clamp(2.2rem,8vw,5rem);font-weight:800;letter-spacing:-.05em;line-height:.98;overflow-wrap:anywhere}
+.top .lead{font-size:clamp(1.05rem,2.3vw,1.4rem);font-weight:300;margin-top:10px}
+.top .meta{color:var(--muted);font-size:.85rem;margin-top:6px}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:26px 0 0}
+@media (min-width:880px){.kpis{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.kpi{display:flex;flex-direction:column-reverse;justify-content:flex-end;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px 18px}
+.kpi dt{font-size:.84rem;color:var(--muted);line-height:1.35;margin-top:4px}
+.kpi dd{margin:0;font-size:clamp(1.7rem,4.4vw,2.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.kpi .sub{display:block;font-size:.78rem;margin-top:2px}
+.kpi.accent{background:var(--strong-pink);border-color:transparent;color:#fff}
+.kpi.accent dt{color:rgba(255,255,255,.9)}
+.kpi:first-child{grid-column:span 2}
+@media (min-width:880px){.kpi:first-child{grid-column:auto}}
+
+/* Navegación */
+.nav{position:sticky;top:0;z-index:20;margin-top:34px;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;gap:4px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;color:var(--muted);font-weight:500;font-size:.92rem;padding:8px 14px;border-radius:999px}
+.nav a:hover{color:var(--ink)}
+.nav a.on{background:var(--ink);color:var(--bg)}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:.86rem;font-weight:500;border:1px solid var(--line);background:var(--surface);padding:7px 13px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .n{opacity:.6;font-variant-numeric:tabular-nums}
+
+/* Muro de marcas */
+.wall-card h3{font-size:clamp(1.2rem,2.6vw,1.55rem);font-weight:600;letter-spacing:-.02em;max-width:34ch}
+.wall{display:flex;flex-wrap:wrap;gap:4px;margin:20px 0 16px}
+.wall i{width:13px;height:13px;border-radius:4px;cursor:pointer;transition:opacity .2s,transform .15s}
+.wall i:hover,.wall i.sel{transform:scale(1.45)}
+.wall.dim i:not(.hl){opacity:.14}
+.wall-legend{display:flex;flex-wrap:wrap;gap:8px}
+.lg-btn{display:inline-flex;align-items:center;gap:8px;font-size:.86rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 13px;cursor:pointer;color:var(--on-night)}
+.lg-btn[aria-pressed="true"]{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.45)}
+.lg-btn b{font-variant-numeric:tabular-nums}
+.wall-info{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);min-height:56px;font-size:.92rem;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.wall-info strong{font-size:1.05rem}
+.wall-info .muted{color:var(--on-night-muted)}
+.link-btn{background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+
+/* Barras */
+.hbars{display:grid;gap:4px;margin-top:14px}
+.hb{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr) 40px;align-items:center;gap:12px;width:100%;background:none;border:0;padding:7px 8px;border-radius:12px;cursor:pointer;text-align:left;font-size:.88rem}
+.hb:hover{background:var(--bg)}
+.hb .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb .bar{display:flex;height:12px;border-radius:999px;overflow:hidden;background:var(--track)}
+.hb .bar span{display:block;height:100%;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.hb .tot{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+@media (max-width:520px){.hb{grid-template-columns:minmax(0,1fr) 40px}.hb .bar{grid-column:1/-1;grid-row:2}}
+.mini-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted);margin-top:12px}
+.mini-legend span{display:inline-flex;align-items:center;gap:6px}
+.days{display:flex;align-items:flex-end;gap:8px;height:150px;margin-top:20px}
+.day{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px;font-size:.78rem}
+.day .col{width:100%;max-width:46px;border-radius:10px 10px 4px 4px;background:var(--st-cp);transition:height .7s cubic-bezier(.2,.8,.2,1);height:0}
+.day b{font-size:.9rem;font-variant-numeric:tabular-nums}
+.day span{color:var(--muted);text-align:center;line-height:1.2}
+@media (max-width:520px){.days{gap:4px}.day span{font-size:.7rem}}
+
+/* Seguimiento */
+.replies{display:grid;gap:10px;margin-top:14px}
+.reply{border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:var(--bg)}
+.reply-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;align-items:baseline}
+.reply-top b{font-size:1.05rem}
+.reply-top span{font-size:.8rem;color:var(--muted)}
+.reply p{font-size:.9rem;margin-top:6px}
+.next{display:inline-block;margin-top:8px;font-size:.82rem;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--strong-pink);color:#fff}
+.wait{list-style:none;margin:14px 0 0;padding:0}
+.wait li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px 0;border-top:1px solid var(--line);align-items:center}
+.wait li:first-child{border-top:0}
+.wait .w-name b{font-weight:600}
+.wait .w-name small{display:block;color:var(--muted);font-size:.8rem}
+.badge-days{font-size:.8rem;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--track);white-space:nowrap;font-variant-numeric:tabular-nums}
+.badge-days.old{background:var(--st-cp);color:#fff}
+.wait .w-hint{grid-column:1/-1;font-size:.8rem;color:var(--warn-ink);background:var(--warn-soft);border-radius:10px;padding:6px 10px}
+.wait .w-act{grid-column:1/-1;font-size:.82rem}
+.wait .w-act a{font-weight:600;text-underline-offset:3px}
+.more-btn{margin-top:12px;background:none;border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:500;font-size:.88rem}
+.more-btn:hover{border-color:var(--muted)}
+.alerts{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+@media (min-width:880px){.alerts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.alerts li{padding:10px 12px;border-radius:12px;background:var(--warn-soft);color:var(--warn-ink);font-size:.88rem}
+.alerts li b{color:var(--ink)}
+@media (prefers-color-scheme: dark){.alerts li b{color:var(--on-night)}}
+.alerts li button{background:none;border:0;padding:0;cursor:pointer;font-weight:700;text-decoration:underline;text-underline-offset:3px;color:inherit}
+
+/* Estrategia */
+.prios{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:12px}
+.prio{display:grid;grid-template-columns:34px minmax(0,1fr);gap:2px 12px;padding:14px 0;border-top:1px solid var(--line)}
+.prio:first-child{border-top:0;padding-top:4px}
+.prio .num{font-weight:800;font-size:1.4rem;color:var(--pink);line-height:1.1;grid-row:span 3}
+.prio .pt{font-weight:600}
+.prio .pw{font-size:.84rem;color:var(--muted)}
+.prio .chips{margin-top:8px}
+.prio .chip{font-size:.8rem;padding:5px 11px}
+.progress{font-size:.78rem;color:var(--muted);margin-top:6px}
+.tips{margin:14px 0 0;padding-left:20px;display:grid;gap:8px;font-size:.92rem}
+.collab{display:grid;gap:10px;margin-top:14px}
+@media (min-width:640px){.collab{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cb{border-radius:16px;padding:14px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+.cb b{font-size:1.05rem}
+.cb small{display:block;color:var(--on-night-muted);font-size:.78rem}
+.cb p{font-size:.86rem;margin-top:6px;color:var(--on-night-muted)}
+
+/* Grupos */
+.groups{display:grid;gap:12px;margin-top:16px}
+@media (min-width:640px){.groups{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:980px){.groups{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.grp{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.grp.open{border-color:var(--st-cp);box-shadow:inset 0 0 0 1px var(--st-cp)}
+.grp-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.grp-top b{font-weight:600}
+.grp-top span{font-size:.78rem;color:var(--muted);white-space:nowrap}
+.grp .chips{margin-top:10px;gap:6px}
+.grp .chip{font-size:.8rem;padding:5px 11px}
+.grp-notes{margin:10px 0 0;padding:0;list-style:none;font-size:.8rem;color:var(--muted);display:grid;gap:4px}
+.grp-tag{display:inline-block;margin-top:10px;font-size:.76rem;font-weight:600;color:var(--st-cp)}
+
+/* Tabla */
+.filters{display:grid;gap:10px}
+@media (min-width:880px){.filters{grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))}}
+.field{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--muted)}
+.field input,.field select{font-size:.95rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
+.filters-2{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-top:14px}
+.count{font-size:.86rem;color:var(--muted)}
+.rows{list-style:none;margin:12px 0 0;padding:0;border-top:1px solid var(--line)}
+.row{border-bottom:1px solid var(--line)}
+.row-head{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name st" "sec date";gap:4px 12px;width:100%;background:none;border:0;padding:13px 4px;text-align:left;cursor:pointer;align-items:center}
+.row-head:hover{background:color-mix(in srgb,var(--surface) 70%,transparent)}
+.r-name{grid-area:name;min-width:0}
+.r-name b{font-weight:600}
+.r-name small{display:block;color:var(--muted);font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.r-sec{grid-area:sec;font-size:.8rem;color:var(--muted)}
+.r-st{grid-area:st;justify-self:end}
+.r-date{grid-area:date;justify-self:end;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.r-chev{display:none}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:500;white-space:nowrap}
+.fit{display:inline-block;font-size:.7rem;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--teal-soft);color:var(--ink);margin-left:6px;vertical-align:1px}
+.warn-tag{display:inline-block;font-size:.7rem;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--warn-soft);color:var(--warn-ink);margin-left:6px;vertical-align:1px}
+@media (min-width:760px){
+  .row-head{grid-template-columns:minmax(0,2fr) minmax(0,1.2fr) 200px 64px 16px;grid-template-areas:"name sec st date chev"}
+  .r-st,.r-date{justify-self:start}
+  .r-chev{display:block;grid-area:chev;color:var(--muted);transition:transform .2s}
+  .row-head[aria-expanded="true"] .r-chev{transform:rotate(45deg)}
+}
+.row-body{padding:2px 4px 18px}
+.row-body dl{display:grid;grid-template-columns:1fr;gap:4px 16px;margin:0;font-size:.9rem}
+@media (min-width:760px){.row-body dl{grid-template-columns:150px minmax(0,1fr)}}
+.row-body dt{color:var(--muted);font-size:.8rem;margin-top:6px}
+@media (min-width:760px){.row-body dt{margin-top:0}}
+.row-body dd{margin:0;overflow-wrap:anywhere}
+.row-body a{text-underline-offset:3px}
+
+footer{padding:36px 20px 56px;color:var(--muted);font-size:.8rem;max-width:1180px;margin:0 auto}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <h1>Colabs de @pauliiguerra</h1>
+  <p class="lead">Marcas potenciales, contactos enviados y respuestas</p>
+  <p class="meta">Datos de la hoja «Marcas Potenciales Colab Pauli» a 30 de octubre de 2026</p>
+  <dl class="kpis" id="kpis"></dl>
+</header>
+
+<nav class="nav" aria-label="Secciones">
+  <div class="wrap nav-inner" id="navInner">
+    <a href="#resumen">Resumen</a>
+    <a href="#seguimiento">Seguimiento</a>
+    <a href="#estrategia">Estrategia</a>
+    <a href="#grupos">Grupos</a>
+    <a href="#marcas">Todas las marcas</a>
+  </div>
+</nav>
+
+<main>
+  <section id="resumen" class="wrap section">
+    <div class="sec-head">
+      <h2>Dónde está cada marca</h2>
+      <p>Un cuadro por marca, ordenadas por estado. Pasa el dedo o toca un cuadro para ver cuál es.</p>
+    </div>
+    <article class="card card-night wall-card">
+      <h3 id="wallTitle"></h3>
+      <div class="wall" id="wall" role="img"></div>
+      <div class="wall-legend" id="wallLegend"></div>
+      <div class="wall-info" id="wallInfo" aria-live="polite"><span class="muted">Toca un cuadro o un estado.</span></div>
+    </article>
+    <div class="grid-2 wide-left" style="margin-top:14px">
+      <article class="card">
+        <h3>Marcas por sector</h3>
+        <p class="hint">Toca un sector para ver sus marcas en la lista.</p>
+        <div class="hbars" id="sectorBars"></div>
+        <div class="mini-legend" id="sectorLegend"></div>
+      </article>
+      <article class="card">
+        <h3>Propuestas enviadas por día</h3>
+        <p class="hint">Fecha de contacto de las marcas contactadas.</p>
+        <div class="days" id="dayBars"></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="seguimiento" class="wrap section">
+    <div class="sec-head">
+      <h2>Seguimiento</h2>
+      <p>Respuestas recibidas, propuestas sin contestar y avisos anotados en la hoja.</p>
+    </div>
+    <div class="grid-2">
+      <article class="card">
+        <h3>Han respondido</h3>
+        <div class="replies" id="replies"></div>
+      </article>
+      <article class="card">
+        <h3>Esperando respuesta</h3>
+        <p class="hint">De la más antigua a la más reciente. Los días se cuentan desde la fecha de contacto.</p>
+        <ul class="wait" id="waitList"></ul>
+        <button type="button" class="more-btn" id="waitMore" hidden></button>
+      </article>
+    </div>
+    <article class="card" style="margin-top:14px">
+      <h3>Avisos antes de contactar</h3>
+      <p class="hint">Notas marcadas con «Ojo» en la hoja, agrupadas por tipo.</p>
+      <div class="chips" id="alertChips" style="margin-top:12px" role="group" aria-label="Tipo de aviso"></div>
+      <ul class="alerts" id="alertList"></ul>
+    </article>
+  </section>
+
+  <section id="estrategia" class="wrap section">
+    <div class="sec-head">
+      <h2>Estrategia</h2>
+      <p>Prioridades y consejos de la pestaña «Notas y Estrategia», con el estado actual de cada marca.</p>
+    </div>
+    <div class="grid-2 wide-left">
+      <article class="card">
+        <h3>Prioridades recomendadas</h3>
+        <ol class="prios" id="prios"></ol>
+      </article>
+      <div style="display:grid;gap:14px;align-content:start">
+        <article class="card card-night">
+          <h3>Ya colaboraron</h3>
+          <p class="hint">Pestaña «Marcas Colaboradas». Úsalas como prueba social al escribir.</p>
+          <div class="collab" id="collab"></div>
+        </article>
+        <article class="card">
+          <h3>Consejos de la hoja</h3>
+          <ul class="tips" id="tips"></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="grupos" class="wrap section">
+    <div class="sec-head">
+      <h2>Grupos empresariales</h2>
+      <p>Marcas del mismo grupo. Si una ya colaboró o respondió, puede abrir la puerta a las demás.</p>
+    </div>
+    <div class="groups" id="groups"></div>
+  </section>
+
+  <section id="marcas" class="wrap section">
+    <div class="sec-head">
+      <h2>Todas las marcas</h2>
+      <p>Busca, filtra y toca una marca para ver el contacto, las notas y el grupo.</p>
+    </div>
+    <article class="card">
+      <div class="filters">
+        <label class="field">Buscar<input type="search" id="q" placeholder="Nombre, email, nota…" autocomplete="off"></label>
+        <label class="field">Sector<select id="fSec"><option value="">Todos</option></select></label>
+        <label class="field">Estado<select id="fSt"><option value="">Todos</option></select></label>
+        <label class="field">Vía de contacto<select id="fCanal"><option value="">Todas</option></select></label>
+      </div>
+      <div class="filters-2">
+        <span class="count" id="count"></span>
+        <div class="chips" id="quickChips"></div>
+      </div>
+      <ul class="rows" id="rows"></ul>
+    </article>
+  </section>
+</main>
+
+<footer>
+  Dashboard de seguimiento de colaboraciones de @pauliiguerra. Los datos vienen de la hoja de cálculo y se actualizan automáticamente.
+</footer>
+
+<script type="text/plain" id="dataPot">
+V|Siesta Campers|Alquiler Campers / Vanlife|Colaboraciones Instagram|CP|29/10||collaborations@siestacampers.com (también formulario en siestacampers.com/blog/how-to-collaborate-with-siesta-campers)|Contacto inicial enviado. Gancho: rutas España/Portugal + prueba social Bluetti/Grandvalira. Fit 5/5.
+J|Holafly|eSIM / Conectividad viajes|Programa de afiliados / Colabs|P|||Sin email público de colabs. Formulario de afiliados: esim.holafly.com/es/programa-afiliados/|eSIM ideal para viajeros. Colaboran mucho con travel influencers, incluso micro.
+J|Airalo|eSIM / Conectividad|Partner Hub / Afiliados|CP|29/10||affiliates@airalo.com (afiliados y colaboraciones de marca)|Contacto inicial enviado. Auto-respuesta recibida. Fit 4/5.
+T|Insta360|Cámaras de acción / Contenido|Creator program|P|||Sin email público de colabs. Formulario del programa Rising Talents: insta360.com/rising-talents|Cámaras ideales para vanlife, MTB y travel content. Programa abierto de creadores.
+T|GoPro|Cámaras de acción|GoPro Creator / Affiliates|P|||Sin email. Formulario de patrocinios en gopro.com/sponsorship (prensa: pr@gopro.com)|Clásico para outdoor y aventura. Contenido de MTB y viajes.
+E|EcoFlow|Energía portátil / Power stations|Colaboraciones / Affiliates|CP|25/10||Enviado a: Influencer@ecoflow.com|Propuesta enviada, sin respuesta. Ojo: competidor de Bluetti. Power stations muy usadas en vanlife para autonomía energética.
+E|BioLite|Outdoor gear / Cocina y luz portátil|Colaboraciones|P|||Sin email de colabs. Afiliados vía Partnerize (bioliteenergy.com/pages/biolite-affiliate-program); soporte: support@bioliteenergy.com. BioLite y Goal Zero son ahora la misma empresa|Productos sostenibles para outdoor y camp. Muy alineado con naturaleza.
+C|Decathlon / Quechua|Outdoor gear / Ropa y material|Influencer / PR España|P|||Sin email visible. Formulario de prensa/colaboraciones en saladeprensa.decathlon.es/contacto; programa de creadores 'Decathlon Factory'|Marca muy fuerte en España para hiking, MTB y camping. Accesible.
+R|Patagonia|Ropa outdoor sostenible|Ambassador / Collabs|P|||press@patagonia.com (prensa, países sin agencia local como España). Ojo: no pagan a influencers, trabajan con embajadores activistas|Marca premium sostenible, valores de naturaleza y minimalismo. Alto fit cultural.
+R|The North Face|Ropa y equipo outdoor|Creator program|CP|22/10|VF Corporation|Enviado a: TheNorthFace@OutsidePR.com; partnerships@thenorthface.com|Propuesta enviada, sin respuesta. Clásico outdoor, buena para hiking y travel.
+F|IATI Seguros|Seguros de viaje|Colaboraciones travel|CP|29/10||partners@iatiseguros.com (programa de colaboradores; formulario en iatiseguros.com/alta-colaboradores/)|Contacto inicial enviado. Fit 4/5.
+E|Anker|Cargadores y power banks|Creator / Affiliates|CP|29/10||influencer@anker.com (influencers y partnerships; afiliados: affiliate@anker.com)|Contacto inicial enviado. Fit 4/5.
+T|Peak Design|Bolsas y accesorios foto/travel|Ambassador program|P|||No encontrado email de colabs. Mejor DM en Instagram @peakdesign o LinkedIn|Productos premium para creadores de contenido y viajeros.
+T|DJI|Drones y acción|Creator program|CP|29/10||KOL@influencer.dji.com (influencers) y global-creator@dji.com (colaboración con creadores)|Contacto inicial enviado. Fit 5/5.
+R|Salomon|Calzado y equipo trail/MTB|Influencer|P||Amer Sports|No encontrado. Recluta embajadores por Instagram y eventos; mejor DM o LinkedIn|Ideal para MTB y hiking. Marca técnica outdoor.
+R|Merrell|Calzado outdoor|Collabs|P|||Affiliates.EU@wwwinc.com (afiliados Europa, indicado en su web española); general: info@merrell.eu|Calzado cómodo y resistente para viajes y naturaleza.
+C|Black+Blum|Vajilla y botellas reutilizables|Colaboraciones|P|||influencer@black-blum.com (colaboraciones con influencers)|Productos sostenibles y prácticos para vida en furgo y viajes.
+E|Goal Zero|Energía solar portátil|Creator|CP|23/10||Enviado a: pr@goalzero.com; support@goalzero.com|Propuesta enviada, sin respuesta. Ojo: misma empresa que BioLite y competidor de Bluetti. Solar panels y power, perfecto para vanlife off-grid.
+V|People Camper|Camperización / Alquiler|Colaboraciones España|P|||peoplecamper@gmail.com (contacto general)|Especialistas en camperizar Volkswagen y similares en España.
+V|Furgocasa|Alquiler campers gran volumen|Colaboraciones creadores|P|||info@furgocasa.com (página para creadores: furgocasa.com/es/creadores-de-contenido)|Buscan creadores de contenido camper en España (Murcia, Madrid, etc.).
+A|NordVPN o Surfshark|VPN / Privacidad viajes|Affiliate / Creator|P|||Programas de afiliados abiertos|Útil para viajeros que se conectan a redes públicas.
+A|Canva|Diseño / Contenido|Creator program|P|||strategic-partnerships@canva.com (avisan de que sus programas de patrocinio están cerrados ahora)|Herramienta útil para creadores. Programa de embajadores activo.
+V|Yescapa|Alquiler campers entre particulares|Colaboraciones / PR|P|||No encontrado email de colabs con creadores (su página de partners es para empresas). Probar por DM en Instagram @yescapa|Plataforma de alquiler de campers entre particulares muy usada en España. Fit directo con vanlife.
+V|Roadsurfer|Alquiler campers|Colaboraciones creadores|P|||Sin email público para creadores. Formulario: roadsurfer.com/cooperations/ (brandpartner@roadsurfer.com es solo para marcas)|Alquiler de campers con bases en España; trabaja mucho con creadores de viajes.
+V|Indie Campers|Alquiler campers|Partnerships|P|||influencer.collaboration@indiecampers.com (o formulario más rápido: ambassador.upfluence.co/indie_campers)|Fuerte en España y Portugal. Encaja con rutas por la península.
+V|Park4night|App vanlife|Colaboraciones|P|||contact@park4night.com (contacto general, no específico de colabs)|App de referencia para encontrar sitios donde dormir en furgo. Integración muy natural en el contenido.
+V|Dometic|Equipamiento camper (neveras, toldos)|PR / Creators|CP|22/10||Enviado a: contact.eu@dometic.com|Propuesta enviada, sin respuesta (incluye Front Runner). Neveras portátiles y equipamiento de furgo. Producto muy demostrable.
+V|Thule|Portabicis y portaequipajes|Creators / PR|CP|25/10||Enviado a: press@thule.com|Propuesta enviada, sin respuesta. Portabicis para la furgo: une vanlife y MTB en un mismo contenido.
+F|Heymondo|Seguros de viaje|Afiliados / Colaboraciones|P|||Sin email visible. Formulario de afiliados: heymondo.es/programa-de-afiliados/|Competidor de IATI, muy activo con viajeros españoles. Contactar uno u otro, no ambos a la vez.
+F|Revolut|Banca / pagos en viaje|Afiliados / Creators|P|||creatorclub@revolut.com (Revolut Creator Club). Ojo: posible conflicto con BBVA|Tarjeta para pagar en el extranjero. Ojo: posible conflicto con BBVA, revisar exclusividades antes.
+F|Wise|Pagos internacionales|Afiliados|P|||partnerwise@wise.com (equipo de partners); solicitud de influencer en wise.com/partner/influencers. Ojo: posible conflicto con BBVA|Tarjeta multidivisa para viajes. Mismo aviso de conflicto con BBVA.
+B|Orbea|Bicicletas MTB|PR / Embajadores|CR|22/10||Enviado a: orbea.eu@orbea.com|Respondieron: trasladan la propuesta al equipo correspondiente. Pendiente de que ese equipo conteste. Marca vasca de bicis, muy fuerte en MTB.
+B|Mondraker|Bicicletas MTB|PR / Embajadores|CR|22/10||Enviado a: marketing@mondraker.com|Respondieron: piden el dossier de colaboración antes de concertar una llamada. PRÓXIMO PASO: enviar dossier. Marca española de MTB.
+A|Komoot|App rutas outdoor|Creator / Colecciones|P|||Sin email. Ahora no buscan nuevos creadores; formulario para entrar en su 'content creator pool' (support.komoot.com)|App de rutas de MTB y senderismo; permite publicar colecciones de rutas propias.
+T|Garmin|Relojes GPS / navegación|PR / Embajadores|P|||info.spain@garmin.com (contacto general España). OJO: hay webs falsas de 'Garmin' con emails @outlook.com, no usarlas|Relojes y GPS para MTB y hiking. Marca técnica con presupuesto de creadores.
+R|Ternua|Ropa outdoor sostenible|PR / Colaboraciones|P|||infor@ternua.com (contacto general). Prensa y comunicación en ternua.com/es/news-press|Marca vasca outdoor sostenible. Alternativa más accesible a Patagonia.
+R|Ecoalf|Moda sostenible|PR / Colaboraciones|P|||bjames@ecoalf.com (contacto de prensa publicado en su web); general: contacto@ecoalf.com|Marca española con materiales reciclados. Valores de sostenibilidad y naturaleza.
+C|Stanley|Termos y botellas|PR / Creators|P|||social@stanley1913.com (redes e influencers)|Termos y tazas para camping y furgo. Muy visual en Reels.
+C|LifeStraw|Filtros de agua portátiles|Colaboraciones|P|||support@lifestraw.com (gestiona también afiliados y prensa); programa de afiliados en su web|Útil en rutas y vanlife off-grid. Mensaje de sostenibilidad.
+C|Naturehike|Material de camping|Creator program|P|||support@naturehike.com (atención al cliente, no específico de colabs)|Material de camping ligero y económico, popular entre viajeros.
+N|226ERS|Nutrición deportiva|Embajadores / Afiliados|P|||info@226ers.com (contacto general). Tienen programa de embajadores en su web|Marca española de nutrición para MTB y deporte outdoor.
+V|Camperdays|Comparador alquiler campers|Afiliados / Colaboraciones|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Comparador de alquiler de campers y autocaravanas. Encaja con rutas en furgo.
+V|Goboony|Alquiler campers entre particulares|Colaboraciones / PR|P|||business@goboony.co.uk (afiliados vía Tradedoubler). Goboony y Yescapa se fusionaron: contactar solo una|Alternativa a Yescapa con presencia en Europa.
+V|McRent|Alquiler autocaravanas|PR / Colaboraciones|P|||press@erwinhymergroup.com (prensa del Erwin Hymer Group, dueño de McRent). Mismo grupo que Hymer|Alquiler de autocaravanas con bases en España.
+V|Volkswagen California|Furgonetas camper|PR / Embajadores|P|||volkswagen-comerciales.es (verificar)|La camper de referencia. Marca aspiracional para vanlife.
+V|Ford Nugget|Furgonetas camper|PR / Embajadores|P|||ford.es (verificar)|Competidora directa de la VW California.
+V|Dacia|Coches / Sleep Pack|PR / Creators|P|||dacia.es (verificar)|Accesorio Sleep Pack para dormir en el coche. Ángulo de vanlife low-cost.
+V|Westfalia|Camperización|PR / Colaboraciones|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Marca histórica de camperización. Contenido nostálgico y de diseño.
+V|Truma|Calefacción y equipamiento camper|PR / Creators|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Calefacción para la furgo. Ideal para contenido de vanlife en invierno.
+V|Fiamma|Toldos y accesorios camper|PR / Colaboraciones|P|||No encontrado. Su web remite a distribuidores locales; mejor DM en Instagram o LinkedIn|Toldos, portabicis y accesorios para furgo.
+E|Victron Energy|Baterías y sistemas solares camper|PR / Colaboraciones|CP|22/10||Enviado a: marketing@victronenergy.com|Propuesta enviada, sin respuesta. Instalaciones eléctricas de furgo. Contenido técnico de autonomía.
+E|Renogy|Paneles solares|Afiliados / Creators|CP|22/10||Enviado a: partnerships@renogy.com|Propuesta enviada, sin respuesta. Ojo: placas solares, posible roce con Bluetti. Paneles solares para furgo off-grid.
+E|Jackery|Power stations|Afiliados / Creators|CP|27/10||Enviado a: marketing@jackery.com|Propuesta enviada, sin respuesta. Ojo: competidor de Bluetti y EcoFlow.
+C|Campingaz|Cocina de camping|PR / Colaboraciones|P|||info.iberia@coleman.eu (Coleman/Campingaz España y Portugal, general). Misma empresa que Coleman|Hornillos y cocina portátil. Muy conocida en España.
+C|Coleman|Material de camping|PR / Colaboraciones|P|||info.iberia@coleman.eu (Coleman/Campingaz España y Portugal, general). Misma empresa que Campingaz|Material clásico de camping: neveras, sillas, iluminación.
+V|ACSI|Tarjeta de descuento campings|Afiliados / Colaboraciones|P|||marketing@acsi.eu (programa de afiliados vía Tradetracker); colaboraciones con formulario en acsi.eu|Tarjeta de descuentos en campings de Europa. Útil fuera de temporada.
+V|Campercontact|App áreas de autocaravanas|Colaboraciones|P|||info@campercontact.com (general). Otras consultas de negocio: e.dejong@campercontact.com|App de áreas para autocaravanas. Alternativa a Park4night.
+T|Starlink|Internet por satélite|PR (verificar si colabora)|P|||starlink.com (verificar)|Internet en la furgo en zonas remotas. Puede no tener programa de creadores.
+D|Kampaoh|Glamping en España|Colaboraciones / PR|P|||creators@kampaoh.com (usado en sus convocatorias de creadores)|Glamping en campings de España. Contenido de escapadas.
+A|Wikiloc|App de rutas|Colaboraciones / PR|P|||No encontrado email público. Solo soporte en ayuda.wikiloc.com; mejor DM en Instagram o LinkedIn|App española de rutas de senderismo y MTB. Fit local muy alto.
+A|AllTrails|App de rutas|Creators / Afiliados|P|||Sin email. Programa de embajadores Trailheads (formulario en alltrails.com)|App internacional de rutas. Alternativa a Komoot y Wikiloc.
+A|Strava|App de deporte|Creators / PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Registro de rutas de MTB y deporte. Muy usada por ciclistas.
+A|Polarsteps|App diario de viaje|Creators / Colaboraciones|P|||hello@polarsteps.com (contacto general)|Registra el recorrido del viaje en un mapa. Muy visual para contenido.
+A|Duolingo|App de idiomas|Creators / PR|P|||partnerships@duolingo.com (aparece en directorios, no confirmado en su web oficial)|Aprender idiomas para viajar. Hace mucho contenido con creadores.
+B|Specialized|Bicicletas MTB|PR / Embajadores|CP|22/10||Enviado a: PR@specialized.com|Propuesta enviada, sin respuesta. Marca top de MTB. Más difícil de conseguir, pero alto valor.
+B|Trek|Bicicletas MTB|PR / Embajadores|P|||Sin email. Programa de embajadores con formulario (visto en la web de Trek ANZ); en España, mejor vía tienda Trek o LinkedIn|Gran marca de bicis con red de tiendas en España.
+B|Canyon|Bicicletas MTB|PR / Embajadores|CP|22/10||Enviado a: us@canyon.com|Propuesta enviada, sin respuesta. Si no contestan, probar press@canyon.com (prensa Europa). Venta online de bicis.
+B|Santa Cruz Bicycles|Bicicletas MTB|PR / Embajadores|CP|22/10||Enviado a: info@santacruzbicycles.com; press@santacruzbicycles.com|Propuesta enviada, sin respuesta. Marca premium de MTB muy aspiracional.
+B|Scott|Bicicletas y equipo|PR / Embajadores|P|||Sin email. Formulario de Scott España en scott-sports.com; mejor LinkedIn (Marketing Manager de Scott España)|Bicis, cascos y ropa. Abarca MTB y montaña.
+B|BH Bikes|Bicicletas MTB|PR / Embajadores|P|||info@bhbikes.com (contacto general)|Marca vasca de bicis. Buen fit local.
+B|MMR Bikes|Bicicletas MTB|PR / Embajadores|P|||cac@slsbikes.com (contacto general / atención al cliente)|Marca asturiana de bicis. Más accesible para colaborar.
+B|Fox Racing|Ropa y protecciones MTB|PR / Creators|P|||customerservice.eu@foxracing.com (general Europa); afiliados vía CJ Affiliate|Ropa y protecciones de MTB muy reconocibles.
+B|POC|Cascos y gafas|PR / Embajadores|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Cascos y protecciones de MTB de diseño escandinavo.
+B|Endura|Ropa de ciclismo|PR / Creators|P||Pentland Brands|No encontrado email de colabs. Endura es de Pentland Brands (mismo grupo que Berghaus)|Ropa técnica de MTB, buena relación calidad-precio.
+B|Shimano|Componentes y calzado ciclismo|PR / Embajadores|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Componentes y zapatillas de MTB. Marca técnica de referencia.
+B|Oakley|Gafas deportivas|PR / Creators|P|||oakley.com (verificar)|Gafas para MTB y outdoor.
+B|100%|Gafas y guantes MTB|PR / Creators|P|||100percent.com (verificar)|Gafas y accesorios de MTB y motocross.
+C|CamelBak|Hidratación|PR / Creators|P|||contact.uk@camelbak.com (general). Su sede europea está en El Prat de Llobregat (Barcelona), tel. +34 931 458 000|Mochilas de hidratación para MTB y senderismo.
+R|Arc'teryx|Ropa outdoor premium|PR / Embajadores|CP|26/10|Amer Sports|Enviado a: media@arcteryx.com|Propuesta enviada, sin respuesta. Marca premium muy aspiracional.
+R|Columbia|Ropa outdoor|PR / Creators|P||Columbia Sportswear Company|corporativo@notabene.es (agencia de prensa de Columbia en España); afiliados en columbiasportswear.es|Ropa outdoor accesible con presencia en España.
+R|Mammut|Ropa y equipo de montaña|PR / Embajadores|P|||Sin email visible. Formulario de contacto en mammut.com|Marca suiza de montaña. Buena para hiking.
+R|Fjällräven|Ropa y mochilas outdoor|PR / Creators|P|||info@fjallraven.se (su web lo indica para marketing y colaboraciones); prensa: press@fjallraven.com|Mochilas Kånken muy populares entre viajeros.
+R|Helly Hansen|Ropa outdoor y náutica|PR / Creators|P|||No encontrado email de colabs (solo atención al cliente). Mejor LinkedIn (equipo de Brand Partnerships)|Ropa técnica para lluvia y frío.
+R|Vaude|Ropa outdoor sostenible|PR / Colaboraciones|P|||No encontrado email de colabs. Ojo: Vaude avisa de emails falsos que ofrecen colabs de influencer en su nombre|Marca alemana con foco en sostenibilidad. Encaja con sus valores.
+R|Picture Organic Clothing|Ropa outdoor sostenible|PR / Embajadores|P|||contact@picture-organic-clothing.com (contacto general)|Marca francesa de ropa outdoor con materiales sostenibles.
+R|Trangoworld|Ropa de montaña|PR / Colaboraciones|P|||info@trangoworld.com (contacto general). Tienen sección de Embajadores en su web|Marca española de montaña. Accesible para colaborar.
+R|Buff|Tubulares y accesorios|PR / Creators|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Marca catalana muy conocida en outdoor.
+R|Icebreaker|Ropa de merino|PR / Creators|P||VF Corporation|No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Ropa de merino que no huele: ideal para vida en furgo.
+M|Osprey|Mochilas|PR / Creators|P||Helen of Troy|affiliates@vervaunt.com (agencia de afiliados de Osprey Europe; 10% para creadores). Misma agencia que Hydro Flask|Mochilas de trekking y viaje de referencia.
+M|Deuter|Mochilas|PR / Creators|P|||info@deuterusa.com (contacto general, oficina EE. UU.)|Mochilas de trekking y MTB. Alternativa a Osprey.
+C|Black Diamond|Material de montaña|PR / Embajadores|CP|23/10||Enviado a: corporate@bdel.com|Propuesta enviada, sin respuesta. Si no contestan, probar info@blackdiamond.eu (Europa). Frontales, bastones y material de montaña.
+C|Petzl|Frontales e iluminación|PR / Colaboraciones|P|||info@petzl.com (contacto general) o formulario en petzl.com|Frontales para camping y rutas nocturnas.
+R|Hoka|Calzado trail|PR / Creators|P||Deckers Brands|Sin email. Afiliados en Europa vía Awin|Calzado de trail muy popular. Alto volumen de búsqueda.
+R|Teva|Sandalias outdoor|PR / Creators|P||Deckers Brands|Sin email. Mejor DM o LinkedIn|Sandalias para vanlife y verano.
+R|Mountain Hardwear|Ropa outdoor|PR / Creators|P||Columbia Sportswear Company|Sin email. Mejor LinkedIn|Marca del grupo Columbia.
+R|Prana|Ropa outdoor|PR / Creators|P||Columbia Sportswear Company|Sin email. Mejor LinkedIn|Marca del grupo Columbia.
+M|Hydro Flask|Botellas|PR / Creators|P||Helen of Troy|Sin email. Afiliados vía la misma agencia que Osprey|Botellas de agua premium.
+C|MSR|Material de camping|PR / Creators|P||Cascade Designs|Sin email. Mejor DM o LinkedIn|Tiendas y material de camping.
+C|Therm-a-Rest|Colchonetas|PR / Creators|P||Cascade Designs|Sin email. Mejor DM o LinkedIn|Colchonetas para camping.
+C|Sea to Summit|Material de camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Material ligero de camping.
+C|Nemo Equipment|Material de camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Tiendas y sábanas de camping.
+C|Big Agnes|Material de camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Tiendas y sacos.
+C|Helinox|Sillas y mesas|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Sillas y mesas ultraligeras.
+C|Snow Peak|Material de camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Marca japonesa premium de camping.
+C|Jetboil|Cocina de camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Hornillos de gas.
+C|Primus|Cocina de camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Hornillos.
+C|Soto|Cocina de camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Hornillos japoneses.
+C|Trangia|Cocina de camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Hornillos de alcohol.
+C|Optimus|Cocina de camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Hornillos.
+C|Esbit|Cocina de camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Combustible sólido.
+C|UCO|Iluminación camping|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Linternas y faroles.
+C|Black Diamond (iluminación)|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Petzl (iluminación)|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Ledlenser|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales alemanes.
+C|Nitecore|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Olight|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Sofirn|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Wurkkos|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Convoy|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Emisar|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Noctigon|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Fireflies|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Lumintop|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Acebeam|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Fenix|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Armytek|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Zebralight|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Skilhunt|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Manker|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Astrolux|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Mateminco|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Hank Wang|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Simon|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|ReyLight|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Prometheus|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Oveready|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|McGizmo|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Peak LED Solutions|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Don|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+C|Custom|Frontales|PR / Creators|P|||Sin email. Mejor DM o LinkedIn|Frontales.
+</script>
+
+<script type="text/plain" id="dataCol">
+F|BBVA|Banca / Finanzas viajes|Ya colaboró (Cuenta Online Joven)|YC|||Ya tiene relación previa|Ya hizo publi de Cuenta Online Joven BBVA. Posible continuar o ampliar.
+N|Fuze Tea|Bebidas|Ya colaboró|YC||The Coca-Cola Company|Coca-Cola / Fuze Tea España|Colaboración previa de retos viajeros. Posible más campañas.
+E|Bluetti|Energía portátil|Bluetti España|YC|||Ya hay contacto con Bluetti España|Colaboración en curso: han enviado una batería y placas solares.
+R|Shein|Moda / Ropa|Colaboraciones|YC||||Colaboración previa realizada
+S|Grandvalira|Deporte / Turismo / Nieve|Colaboraciones|YC||||Colaboración previa realizada (Pal Arinsal / Grandvalira Bike Park)
+B|Commencal|Bicicletas MTB|Ya colaboró|YC|ago 2026 (finde ~20/08, evento Commencal Village)||Ya tiene relación previa|Colaboró este verano. Respondieron por email: abiertos a colaboraciones puntuales, pero sin apoyo anual continuo. Abiertos a colabs conjuntas de cara al invierno (junto con Grandvalira). Emails usados: info@commencal.com; media@commencal.com; store.us@commencal.com
+N|Cerveceros de España|Bebidas / Campañas|Ya colaboró|YC||||Campañas institucionales y consumo responsable en carretera/viajes. Colaboración realizada.
+T|Sony|Cámaras / Tecnología|PR / Creators|YC||Sony|tania.burgueno@sony.com (Marketing & Communications Head Sony Iberia)|Cámaras para creadores (vlog, mirrorless). Colaboración realizada.
+N|Batiste|Cuidado personal / Higiene|Ya colaboró|YC||Church & Dwight||Champú en seco para viajes y vanlife. Colaboración realizada.
+D|Alohacamp|Alojamiento / Glamping|Ya colaboró|YC||||Plataforma de glamping y escapadas en la naturaleza. Colaboración realizada.
+V|ITV|Automoción / Mantenimiento camper|Ya colaboró|YC||||Inspección técnica de vehículos y mantenimiento furgoneta. Colaboración realizada.
+J|Jetpac Global|eSIM / Conectividad viajes|Ya colaboró|YC||Circles.Life||eSIM y conectividad internacional para viajeros. Colaboración realizada.
+N|Natullin|Cuidado personal / Cosmética natural|Ya colaboró|YC||||Cosmética natural y sostenible para viajes. Colaboración realizada.
+J|eSimFLAG|eSIM / Conectividad viajes|Ya colaboró|YC||||eSIM para viajes internacionales. Colaboración realizada.
+N|3INA|Cosmética / Maquillaje|Ya colaboró|YC||||Marca española de maquillaje y cosmética vegana. Colaboración realizada.
+</script>
+
+<!-- grupo|marca|nota -->
+<script type="text/plain" id="dataGrp">
+The Coca-Cola Company|Fuze Tea|Ya colaboró: usar esta relación como puerta de entrada al grupo.
+The Coca-Cola Company|Aquarius|Preguntar al contacto de Fuze Tea por el equipo de Aquarius.
+VF Corporation|The North Face|
+VF Corporation|Timberland|
+VF Corporation|Vans|
+VF Corporation|Icebreaker|
+VF Corporation|Eastpak|
+VF Corporation|Altra|
+Amer Sports|Salomon|
+Amer Sports|Arc'teryx|
+Deckers Brands|Hoka|
+Deckers Brands|Teva|
+Columbia Sportswear Company|Columbia|
+Columbia Sportswear Company|Mountain Hardwear|
+Columbia Sportswear Company|Prana|
+Helen of Troy|Osprey|
+Helen of Troy|Hydro Flask|
+Cascade Designs|MSR|
+Cascade Designs|Therm-a-Rest|
+Pentland Brands|Berghaus|
+Pentland Brands|Endura|
+Pentland Brands|Ellesse|
+Pentland Brands|Speedo|
+Pentland Brands|Canterbury|
+Pentland Brands|Mitre|
+Pentland Brands|Kickers|
+Pentland Brands|Red or Dead|
+Pentland Brands|Hunter|
+Pentland Brands|Lacoste Footwear|
+Pentland Brands|Ted Baker Footwear|
+Pentland Brands|Boxfresh|
+Pentland Brands|One True Saxon|
+Pentland Brands|Propet|
+Pentland Brands|LACOSTE|
+Pentland Brands|Ted Baker|
+Pentland Brands|Hunter Boots|
+Pentland Brands|Speedo|
+Pentland Brands|Canterbury|
+Pentland Brands|Mitre|
+Pentland Brands|Kickers|
+Pentland Brands|Red or Dead|
+Pentland Brands|Boxfresh|
+Pentland Brands|One True Saxon|
+Pentland Brands|Propet|
+Pentland Brands|LACOSTE Footwear|
+Pentland Brands|Ted Baker Footwear|
+Pentland Brands|Hunter|
+Pentland Brands|Ellesse|
+Pentland Brands|Berghaus|
+Pentland Brands|Endura|
+Pentland Brands|Canterbury of New Zealand|
+Pentland Brands|Mitre Sports|
+Pentland Brands|Kickers|
+Pentland Brands|Red or Dead|
+Pentland Brands|Boxfresh|
+Pentland Brands|One True Saxon|
+Pentland Brands|Propet|
+</script>
+
+<script>
+/* Datos y lógica del dashboard */
+(function(){
+  const today = new Date(2026, 9, 30); // 30 octubre 2026
+  const MONTHS = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const nfInt = new Intl.NumberFormat('es-ES');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s);
+
+  const SECTORS = {
+    V:'Vanlife y camping', E:'Energía portátil', C:'Material de camping y montaña', B:'Bici y MTB',
+    R:'Ropa y calzado', M:'Mochilas y equipaje', T:'Foto, vídeo y tecnología', A:'Apps y servicios digitales',
+    J:'Viajes y transporte', D:'Destinos turísticos', F:'Finanzas y seguros', S:'Surf, nieve y agua', N:'Alimentación y cuidado'
+  };
+  const ST = {
+    YC:{label:'Ya colaboró', c:'var(--st-yc)', o:0},
+    CR:{label:'Contactado, respondió', c:'var(--st-cr)', o:1},
+    CP:{label:'Contactado, pendiente', c:'var(--st-cp)', o:2},
+    NI:{label:'No interesado', c:'var(--st-ni)', o:3},
+    P:{label:'Potencial', c:'var(--st-p)', o:4}
+  };
+  const stOf = r => ST[r.est] || ST.P;
+  const pill = r => '<span class="pill"><i class="dot" style="background:' + stOf(r).c + '"></i>' + stOf(r).label + '</span>';
+
+  /* Avisos («Ojo») y vía de contacto */
+  function cutSentence(s) {
+    const re = /\.\s+(?=[A-ZÁÉÍÓÚÑ¿])/g; let m;
+    while ((m = re.exec(s))) {
+      const tok = s.slice(0, m.index).split(/\s/).pop();
+      if (!/^(Dr|EE|UU|RR|PP|Sr|Sra)$/.test(tok)) return s.slice(0, m.index + 1);
+    }
+    return s;
+  }
+  function extract(text, startRe) {
+    const out = []; let t = text, i = t.search(startRe);
+    while (i > -1) {
+      const sent = cutSentence(t.slice(i));
+      out.push(sent);
+      t = t.slice(i + sent.length);
+      i = t.search(startRe);
+    }
+    return out;
+  }
+  function getAvisos(r) {
+    const notes = r.notas || '';
+    const avisos = extract(notes, /\bOjo\b/i);
+    if (avisos.length) return avisos;
+    if (/conflicto|exclusiv|roce|competidor/i.test(notes)) return extract(notes, /conflicto|exclusiv|roce|competidor/i);
+    return [];
+  }
+  function firstMail(e) {
+    const m = e && e.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+    return m ? m[0] : '';
+  }
+  function getCanal(r) {
+    const e = r.email;
+    if (r.est === 'YC') return 'Relación existente';
+    if (/^Enviado a:|^Contactado a través/.test(e)) return 'Email ya enviado';
+    if (firstMail(e)) return 'Email disponible';
+    if (/formulario/i.test(e)) return 'Formulario o programa';
+    if (/\bDM\b|LinkedIn/.test(e)) return 'DM o LinkedIn';
+    if (/afiliad|programa|solicitud|microsite|registro|sala de prensa/i.test(e)) return 'Formulario o programa';
+    if (/verificar/i.test(e)) return 'Web por verificar';
+    return 'Sin vía clara';
+  }
+  const CANALES = ['Email disponible','Formulario o programa','DM o LinkedIn','Web por verificar','Sin vía clara','Email ya enviado','Relación existente'];
+
+  function parse(id) {
+    return document.getElementById(id).textContent.split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+      const f = l.split('|');
+      const r = {sec:f[0], name:f[1], cat:f[2], contacto:f[3], est:f[4], fecha:f[5] || '', grupo:f[6] || '', email:f[7] || '', notas:f[8] || ''};
+      const m = /^(\d{1,2})\/(\d{1,2})$/.exec(r.fecha);
+      r.date = m ? new Date(2026, +m[2] - 1, +m[1]) : null;
+      r.fechaTxt = r.date ? r.date.getDate() + ' ' + MONTHS[r.date.getMonth()] : r.fecha;
+      const fit = /Fit (\d)\/5/.exec(r.notas); r.fit = fit ? +fit[1] : 0;
+      r.avisos = getAvisos(r);
+      r.canal = getCanal(r);
+      r.search = (r.name + ' ' + r.cat + ' ' + r.contacto + ' ' + r.email + ' ' + r.notas + ' ' + r.grupo + ' ' + (SECTORS[r.sec] || '')).toLowerCase();
+      return r;
+    });
+  }
+  const pot = parse('dataPot');
+  const col = parse('dataCol');
+  const all = [...col, ...pot];
+  const byName = new Map(all.map(r => [r.name, r]));
+  const count = (arr, est) => arr.filter(r => r.est === est).length;
+  const daysSince = r => r.date ? Math.round((today - r.date) / 864e5) : null;
+
+  /* KPIs */
+  const nCP = count(pot, 'CP'), nCR = count(pot, 'CR'), nContact = nCP + nCR;
+  const KPIS = [
+    {v:pot.length, t:'marcas en la lista de potenciales'},
+    {v:nContact, t:'contactadas', sub:pct(nContact / pot.length * 100) + ' de la lista'},
+    {v:nCR, t:'han respondido', sub:'tasa de respuesta del ' + pct(nCR / nContact * 100), accent:true},
+    {v:nCP, t:'esperando respuesta'},
+    {v:col.length, t:'ya colaboraron'}
+  ];
+  $('#kpis').innerHTML = KPIS.map(k => '<div class="kpi' + (k.accent ? ' accent' : '') + '"><dt>' + k.t + (k.sub ? '<span class="sub">' + k.sub + '</span>' : '') + '</dt><dd data-count="' + k.v + '">' + nfInt.format(k.v) + '</dd></div>').join('');
+  if (!reduced) {
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = +el.dataset.count, t0 = performance.now(), dur = 1000;
+      const step = now => {
+        const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = nfInt.format(Math.round(target * e));
+        if (k < 1) requestAnimationFrame(step);
+      };
+      el.textContent = '0'; requestAnimationFrame(step);
+    });
+  }
+  function pct(n) { return Math.round(n) + '%'; }
+
+  /* Navegación activa */
+  const navLinks = [...document.querySelectorAll('.nav a')];
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, {rootMargin:'-40% 0px -55% 0px'});
+  document.querySelectorAll('main section').forEach(s => io.observe(s));
+
+  /* Muro */
+  const STORDER = ['YC','CR','CP','NI','P'];
+  const wall = $('#wall');
+  const wallInfo = $('#wallInfo');
+  const wallTitle = $('#wallTitle');
+  wallTitle.textContent = all.length + ' marcas en seguimiento';
+  const wallItems = all.map((r, i) => {
+    const el = document.createElement('i');
+    el.style.background = stOf(r).c;
+    el.title = r.name;
+    el.dataset.i = i;
+    el.addEventListener('click', () => showInfo(i));
+    wall.appendChild(el);
+    return el;
+  });
+  function showInfo(i) {
+    const r = all[i];
+    wallItems.forEach((el, j) => el.classList.toggle('sel', j === i));
+    wall.classList.add('dim');
+    wallItems[i].classList.add('hl');
+    wallInfo.innerHTML = '<strong>' + r.name + '</strong> <span class="muted">' + (SECTORS[r.sec] || '') + '</span> ' + pill(r) + (r.fechaTxt ? ' <span class="muted">' + r.fechaTxt + '</span>' : '') + (r.grupo ? ' <span class="muted">Grupo: ' + r.grupo + '</span>' : '') + ' <button type="button" class="link-btn" data-goto="' + r.name + '">Ver ficha</button>';
+  }
+  wallInfo.addEventListener('click', e => {
+    const btn = e.target.closest('[data-goto]');
+    if (btn) {
+      const name = btn.dataset.goto;
+      document.getElementById('q').value = name;
+      applyFilters();
+      document.getElementById('marcas').scrollIntoView({behavior:'smooth'});
+    }
+  });
+
+  /* Leyenda muro */
+  const wallLegend = $('#wallLegend');
+  STORDER.forEach(st => {
+    const n = count(all, st);
+    if (!n) return;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'lg-btn'; b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<i class="dot" style="background:' + ST[st].c + '"></i><b>' + n + '</b> ' + ST[st].label;
+    b.addEventListener('click', () => {
+      const on = b.getAttribute('aria-pressed') === 'true';
+      wallLegend.querySelectorAll('.lg-btn').forEach(x => x.setAttribute('aria-pressed', 'false'));
+      if (!on) {
+        b.setAttribute('aria-pressed', 'true');
+        wall.classList.add('dim');
+        wallItems.forEach((el, i) => el.classList.toggle('hl', all[i].est === st));
+      } else {
+        wall.classList.remove('dim');
+        wallItems.forEach(el => el.classList.remove('hl'));
+      }
+    });
+    wallLegend.appendChild(b);
+  });
+
+  /* Barras de sector */
+  const secRows = Object.keys(SECTORS).map(k => {
+    const rows = all.filter(r => r.sec === k);
+    return {k, name:SECTORS[k], total:rows.length, by:STORDER.map(s => rows.filter(r => r.est === s).length)};
+  }).filter(s => s.total).sort((a, b) => b.total - a.total);
+  const maxSec = secRows[0].total;
+  const secFills = [];
+  $('#sectorBars').innerHTML = '';
+  secRows.forEach(s => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'hb';
+    const contacted = s.by[1] + s.by[2];
+    b.setAttribute('aria-label', s.name + ': ' + s.total + ' marcas, ' + contacted + ' contactadas');
+    b.innerHTML = '<span class="nm">' + s.name + '</span><span class="bar" style="width:' + (s.total / maxSec * 100) + '%"></span><span class="tot">' + s.total + '</span>';
+    const bar = b.querySelector('.bar');
+    STORDER.forEach((st, i) => {
+      if (!s.by[i]) return;
+      const sp = document.createElement('span');
+      sp.style.background = ST[st].c;
+      sp.style.width = (s.by[i] / s.total * 100) + '%';
+      bar.appendChild(sp);
+    });
+    b.addEventListener('click', () => {
+      document.getElementById('fSec').value = s.k;
+      applyFilters();
+      document.getElementById('marcas').scrollIntoView({behavior:'smooth'});
+    });
+    $('#sectorBars').appendChild(b);
+  });
+  const sectorLegend = $('#sectorLegend');
+  STORDER.forEach(st => {
+    const n = count(all, st);
+    if (!n) return;
+    const sp = document.createElement('span');
+    sp.innerHTML = '<i class="dot" style="background:' + ST[st].c + '"></i>' + ST[st].label;
+    sectorLegend.appendChild(sp);
+  });
+
+  /* Barras por día */
+  const dayMap = new Map();
+  pot.filter(r => r.date).forEach(r => {
+    const key = r.date.toISOString().slice(0,10);
+    dayMap.set(key, (dayMap.get(key) || 0) + 1);
+  });
+  const days = [...dayMap.entries()].sort((a,b) => a[0].localeCompare(b[0])).slice(-14);
+  const maxDay = Math.max(...days.map(d => d[1]), 1);
+  $('#dayBars').innerHTML = days.map(([k, n]) => {
+    const d = new Date(k);
+    const label = d.getDate() + ' ' + MONTHS[d.getMonth()];
+    return '<div class="day"><div class="col" style="height:' + (n / maxDay * 100) + '%"></div><b>' + n + '</b><span>' + label + '</span></div>';
+  }).join('');
+
+  /* Respuestas */
+  const replies = pot.filter(r => r.est === 'CR');
+  $('#replies').innerHTML = replies.map(r => {
+    const next = /PRÓXIMO PASO: ([^.]+)/.exec(r.notas);
+    return '<div class="reply"><div class="reply-top"><b>' + r.name + '</b><span>' + (r.fechaTxt || '') + '</span></div><p>' + r.notas + '</p>' + (next ? '<span class="next">Próximo: ' + next[1] + '</span>' : '') + '</div>';
+  }).join('') || '<p class="hint">Ninguna respuesta registrada todavía.</p>';
+
+  /* Esperando respuesta */
+  const wait = pot.filter(r => r.est === 'CP').sort((a,b) => (a.date||0) - (b.date||0));
+  const waitList = $('#waitList');
+  const waitMore = $('#waitMore');
+  let waitShown = 8;
+  function renderWait() {
+    waitList.innerHTML = wait.slice(0, waitShown).map(r => {
+      const d = daysSince(r);
+      const old = d && d > 7;
+      return '<li><div class="w-name"><b>' + r.name + '</b><small>' + (r.cat || '') + '</small></div><span class="badge-days' + (old ? ' old' : '') + '">' + (d != null ? d + ' días' : 'sin fecha') + '</span>' + (r.avisos.length ? '<div class="w-hint">' + r.avisos[0] + '</div>' : '') + '<div class="w-act"><a href="mailto:' + firstMail(r.email) + '">Escribir</a></div></li>';
+    }).join('');
+    waitMore.hidden = waitShown >= wait.length;
+    waitMore.textContent = 'Ver ' + (wait.length - waitShown) + ' más';
+  }
+  renderWait();
+  waitMore.addEventListener('click', () => { waitShown = wait.length; renderWait(); });
+
+  /* Avisos */
+  const alerts = all.filter(r => r.avisos.length);
+  const alertTypes = [...new Set(alerts.flatMap(r => r.avisos.map(a => a.split(':')[0] || 'Ojo')))];
+  const alertChips = $('#alertChips');
+  alertTypes.forEach(t => {
+    const c = document.createElement('button');
+    c.type = 'button'; c.className = 'chip'; c.textContent = t;
+    c.addEventListener('click', () => {
+      alertChips.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', 'false'));
+      c.setAttribute('aria-pressed', 'true');
+      renderAlerts(t);
+    });
+    alertChips.appendChild(c);
+  });
+  function renderAlerts(filter) {
+    const list = filter ? alerts.filter(r => r.avisos.some(a => a.startsWith(filter))) : alerts;
+    $('#alertList').innerHTML = list.map(r => '<li><b>' + r.name + '</b>: ' + r.avisos[0] + ' <button type="button" data-goto="' + r.name + '">Ver</button></li>').join('') || '<li>No hay avisos.</li>';
+  }
+  renderAlerts();
+  $('#alertList').addEventListener('click', e => {
+    const btn = e.target.closest('[data-goto]');
+    if (btn) {
+      document.getElementById('q').value = btn.dataset.goto;
+      applyFilters();
+      document.getElementById('marcas').scrollIntoView({behavior:'smooth'});
+    }
+  });
+
+  /* Estrategia / prioridades */
+  const priosData = [
+    {n:1, t:'Marcas de vanlife/campers', w:'Fit perfecto y contenido natural', brands:['Siesta Campers','Furgocasa','People Camper']},
+    {n:2, t:'Energía portátil', w:'Muy útil y demostrable en la furgo', brands:['EcoFlow','Bluetti','Goal Zero','BioLite']},
+    {n:3, t:'eSIM y conectividad', w:'Problema real de viajeros, alta conversión', brands:['Holafly','Airalo']},
+    {n:4, t:'Cámaras y tech de contenido', w:'Contenido visual de alta calidad', brands:['Insta360','GoPro','DJI','Peak Design']}
+  ];
+  $('#prios').innerHTML = priosData.map(p => {
+    const brands = p.brands.map(name => {
+      const r = byName.get(name);
+      return r ? '<button type="button" class="chip" data-goto="' + name + '">' + name + ' ' + (r.est === 'YC' ? '✓' : r.est === 'CR' ? '✓' : r.est === 'CP' ? '⏳' : '') + '</button>' : '';
+    }).join('');
+    return '<li class="prio"><span class="num">' + p.n + '</span><div class="pt">' + p.t + '</div><div class="pw">' + p.w + '</div><div class="chips">' + brands + '</div></li>';
+  }).join('');
+  $('#prios').addEventListener('click', e => {
+    const btn = e.target.closest('[data-goto]');
+    if (btn) {
+      document.getElementById('q').value = btn.dataset.goto;
+      applyFilters();
+      document.getElementById('marcas').scrollIntoView({behavior:'smooth'});
+    }
+  });
+
+  /* Ya colaboraron */
+  $('#collab').innerHTML = col.map(r => '<div class="cb"><b>' + r.name + '</b><small>' + (SECTORS[r.sec] || '') + '</small><p>' + (r.notas || 'Colaboración realizada') + '</p></div>').join('');
+
+  /* Consejos */
+  const tips = [
+    'Usa las colaboraciones previas (Bluetti, Grandvalira, Commencal, BBVA, Fuze Tea) como prueba social en los emails.',
+    'Prioriza marcas con Fit 5/5 o 4/5 y vía de contacto clara (email o formulario).',
+    'Para grupos empresariales, si una marca responde, pregunta por el resto del grupo.',
+    'Evita contactar competidores directos al mismo tiempo (ej. EcoFlow y Bluetti, IATI y Heymondo).',
+    'Para marcas sin email, usa DM en Instagram o LinkedIn mencionando el nicho vanlife/MTB.'
+  ];
+  $('#tips').innerHTML = tips.map(t => '<li>' + t + '</li>').join('');
+
+  /* Grupos */
+  const groups = parse('dataGrp').reduce((acc, r) => {
+    if (!acc[r.sec]) acc[r.sec] = []; // wait, dataGrp is Grupo|Marca|Nota so f[0] is grupo
+    // Fix: parse for grp uses same, but fields are different
+    return acc;
+  }, {});
+  // Re-parse groups properly
+  const grpRaw = document.getElementById('dataGrp').textContent.split('\n').map(l => l.trim()).filter(Boolean);
+  const grpMap = {};
+  grpRaw.forEach(l => {
+    const p = l.split('|');
+    const g = p[0], m = p[1], n = p[2] || '';
+    if (!grpMap[g]) grpMap[g] = [];
+    grpMap[g].push({m, n});
+  });
+  const groupsEl = $('#groups');
+  Object.entries(grpMap).forEach(([g, brands]) => {
+    const open = brands.some(b => {
+      const r = byName.get(b.m);
+      return r && (r.est === 'YC' || r.est === 'CR');
+    });
+    const chips = brands.map(b => {
+      const r = byName.get(b.m);
+      const cls = r ? (r.est === 'YC' ? ' style="background:var(--st-yc);color:#fff"' : r.est === 'CR' ? ' style="background:var(--st-cr);color:#fff"' : '') : '';
+      return '<button type="button" class="chip" data-goto="' + b.m + '"' + cls + '>' + b.m + '</button>';
+    }).join('');
+    const notes = brands.filter(b => b.n).map(b => '<li>' + b.n + '</li>').join('');
+    const div = document.createElement('div');
+    div.className = 'grp' + (open ? ' open' : '');
+    div.innerHTML = '<div class="grp-top"><b>' + g + '</b><span>' + brands.length + ' marcas</span></div><div class="chips">' + chips + '</div>' + (notes ? '<ul class="grp-notes">' + notes + '</ul>' : '') + (open ? '<span class="grp-tag">Puerta abierta</span>' : '');
+    groupsEl.appendChild(div);
+  });
+  groupsEl.addEventListener('click', e => {
+    const btn = e.target.closest('[data-goto]');
+    if (btn) {
+      document.getElementById('q').value = btn.dataset.goto;
+      applyFilters();
+      document.getElementById('marcas').scrollIntoView({behavior:'smooth'});
+    }
+  });
+
+  /* Tabla de marcas */
+  const fSec = $('#fSec'), fSt = $('#fSt'), fCanal = $('#fCanal'), q = $('#q');
+  Object.entries(SECTORS).forEach(([k,v]) => {
+    const o = document.createElement('option');
+    o.value = k; o.textContent = v;
+    fSec.appendChild(o);
+  });
+  Object.entries(ST).forEach(([k,v]) => {
+    const o = document.createElement('option');
+    o.value = k; o.textContent = v.label;
+    fSt.appendChild(o);
+  });
+  CANALES.forEach(c => {
+    const o = document.createElement('option');
+    o.value = c; o.textContent = c;
+    fCanal.appendChild(o);
+  });
+  const quick = [
+    {l:'Potenciales', f:() => r => r.est === 'P'},
+    {l:'Contactadas', f:() => r => r.est === 'CP' || r.est === 'CR'},
+    {l:'Con email', f:() => r => r.canal === 'Email disponible' || r.canal === 'Email ya enviado'},
+    {l:'Fit alto', f:() => r => r.fit >= 4}
+  ];
+  const quickChips = $('#quickChips');
+  quick.forEach(qi => {
+    const c = document.createElement('button');
+    c.type = 'button'; c.className = 'chip'; c.textContent = qi.l;
+    c.addEventListener('click', () => {
+      quickChips.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', 'false'));
+      c.setAttribute('aria-pressed', 'true');
+      applyFilters(qi.f());
+    });
+    quickChips.appendChild(c);
+  });
+
+  function applyFilters(extra) {
+    const sq = q.value.toLowerCase().trim();
+    const sec = fSec.value, st = fSt.value, can = fCanal.value;
+    const filtered = all.filter(r => {
+      if (sec && r.sec !== sec) return false;
+      if (st && r.est !== st) return false;
+      if (can && r.canal !== can) return false;
+      if (sq && !r.search.includes(sq)) return false;
+      if (extra && !extra(r)) return false;
+      return true;
+    });
+    $('#count').textContent = filtered.length + ' marcas';
+    $('#rows').innerHTML = filtered.map(r => {
+      const expanded = false;
+      return '<li class="row"><button type="button" class="row-head" aria-expanded="false"><span class="r-name"><b>' + r.name + '</b><small>' + (r.cat || '') + '</small></span><span class="r-sec">' + (SECTORS[r.sec] || '') + '</span><span class="r-st">' + pill(r) + (r.fit ? '<span class="fit">Fit ' + r.fit + '/5</span>' : '') + (r.avisos.length ? '<span class="warn-tag">Ojo</span>' : '') + '</span><span class="r-date">' + (r.fechaTxt || '') + '</span><span class="r-chev">+</span></button><div class="row-body" hidden><dl><dt>Contacto</dt><dd>' + (r.contacto || '-') + '</dd><dt>Email / vía</dt><dd>' + (r.email || '-') + '</dd><dt>Grupo</dt><dd>' + (r.grupo || '-') + '</dd><dt>Notas</dt><dd>' + (r.notas || '-') + '</dd></dl></div></li>';
+    }).join('');
+    $('#rows').querySelectorAll('.row-head').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !open);
+        btn.nextElementSibling.hidden = open;
+      });
+    });
+  }
+  [q, fSec, fSt, fCanal].forEach(el => el.addEventListener('input', () => applyFilters()));
+  applyFilters();
+
+  /* Smooth scroll for nav */
+  document.querySelectorAll('.nav a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({behavior: reduced ? 'auto' : 'smooth'});
+    });
+  });
+})();
+</script>
+</body>
+</html>
