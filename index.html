@@ -2,7 +2,94 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Restaurando...</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Colabs de @pauliiguerra</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7EFE4;--surface:#FFFDF9;--ink:#18212B;--muted:#646B75;--pink:#DF3F80;--teal:#1B95A0;--st-p:#CDBFAE;--st-cp:#8A5CC2;--st-cr:#1B95A0;--st-yc:#3D9A5B;--st-ni:#8C5B3E;--font:Poppins,system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding:20px}h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:800;letter-spacing:-.04em;margin:0}
+.meta{color:var(--muted);font-size:.9rem;margin-top:8px}.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:24px 0}
+.kpi{background:var(--surface);border-radius:16px;padding:14px 16px}.kpi dt{font-size:.8rem;color:var(--muted)}.kpi dd{margin:0;font-size:1.8rem;font-weight:700}
+.card{background:var(--surface);border-radius:18px;padding:18px;margin:16px 0}
+.row{border-bottom:1px solid rgba(0,0,0,.08);padding:12px 0}.row b{font-weight:600}.pill{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:500}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+input,select{font:inherit;padding:10px 12px;border-radius:12px;border:1px solid rgba(0,0,0,.12);width:100%;max-width:280px;margin:4px 8px 4px 0}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+</style>
 </head>
-<body><p>Restaurando dashboard. Espera un momento.</p></body>
+<body>
+<div class="wrap">
+  <h1>Colabs de @pauliiguerra</h1>
+  <p class="meta" id="meta">Cargando datos del Google Sheet…</p>
+  <dl class="kpis" id="kpis"></dl>
+  <div class="card">
+    <h2 style="margin:0 0 12px">Seguimiento</h2>
+    <div id="replies"></div>
+  </div>
+  <div class="card">
+    <h2 style="margin:0 0 12px">Todas las marcas</h2>
+    <div class="filters">
+      <input type="search" id="q" placeholder="Buscar marca…">
+      <select id="fEst"><option value="">Todos los estados</option></select>
+    </div>
+    <div id="count" class="meta"></div>
+    <div id="rows"></div>
+  </div>
+</div>
+<script src="data_pot_0.js"></script>
+<script src="data_pot_1.js"></script>
+<script src="data_pot_2.js"></script>
+<script src="data_pot_3.js"></script>
+<script src="data_pot_4.js"></script>
+<script src="data_pot_5.js"></script>
+<script src="data_pot_6.js"></script>
+<script src="data_pot_7.js"></script>
+<script src="data_pot_8.js"></script>
+<script src="data_col.js"></script>
+<script src="data_grp.js"></script>
+<script src="data_combine.js"></script>
+<script>
+(function(){
+  const ST={P:'Potencial',CP:'Contactado',CR:'Respondió',YC:'Ya colaboró',NI:'No interesado'};
+  const STC={P:'var(--st-p)',CP:'var(--st-cp)',CR:'var(--st-cr)',YC:'var(--st-yc)',NI:'var(--st-ni)'};
+  const STORDER=['YC','CR','CP','P','NI'];
+  function parse(raw){
+    return (raw||'').trim().split('\n').filter(Boolean).map(l=>{
+      const p=l.split('|');
+      return {sec:p[0],name:p[1],cat:p[2],contacto:p[3],est:p[4],fecha:p[5]||'',grupo:p[6]||'',email:p[7]||'',notas:p[8]||''};
+    });
+  }
+  const pot=parse(window.DASH_DATA&&window.DASH_DATA.pot);
+  const col=parse(window.DASH_DATA&&window.DASH_DATA.col);
+  const all=pot.concat(col);
+  const counts=STORDER.reduce((a,s)=>{a[s]=all.filter(r=>r.est===s).length;return a;},{});
+  document.getElementById('meta').textContent='Datos de la hoja · '+all.length+' marcas · 30 de octubre de 2026';
+  document.getElementById('kpis').innerHTML=[
+    ['Total',all.length],
+    ['Contactadas',(counts.CP||0)+(counts.CR||0)+(counts.YC||0)],
+    ['Respondieron',counts.CR||0],
+    ['Ya colaboraron',counts.YC||0],
+    ['Potencial',counts.P||0]
+  ].map(([k,v])=>'<div class="kpi"><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('');
+  const replies=all.filter(r=>r.est==='CR');
+  document.getElementById('replies').innerHTML=replies.length?replies.map(r=>'<div class="row"><b>'+r.name+'</b> <span class="meta">'+r.fecha+'</span><br><span style="font-size:.9rem">'+r.notas+'</span></div>').join(''):'<p class="meta">Sin respuestas aún en los datos cargados.</p>';
+  const fEst=document.getElementById('fEst');
+  STORDER.forEach(s=>{if(counts[s]){const o=document.createElement('option');o.value=s;o.textContent=ST[s]+' ('+counts[s]+')';fEst.appendChild(o);}});
+  function render(){
+    const term=(document.getElementById('q').value||'').toLowerCase();
+    const est=fEst.value;
+    let list=all.slice();
+    if(est)list=list.filter(r=>r.est===est);
+    if(term)list=list.filter(r=>[r.name,r.cat,r.notas,r.email].join(' ').toLowerCase().includes(term));
+    list.sort((a,b)=>STORDER.indexOf(a.est)-STORDER.indexOf(b.est)||a.name.localeCompare(b.name));
+    document.getElementById('count').textContent=list.length+' marcas';
+    document.getElementById('rows').innerHTML=list.map(r=>'<div class="row"><b>'+r.name+'</b> <span class="pill"><span class="dot" style="background:'+STC[r.est]+'"></span>'+ST[r.est]+'</span> <span class="meta">'+(r.fecha||'')+'</span><br><span class="meta">'+r.cat+'</span>'+(r.notas?'<br><span style="font-size:.85rem">'+r.notas.slice(0,180)+(r.notas.length>180?'…':'')+'</span>':'')+'</div>').join('');
+  }
+  document.getElementById('q').addEventListener('input',render);
+  fEst.addEventListener('change',render);
+  render();
+})();
+</script>
+</body>
 </html>
