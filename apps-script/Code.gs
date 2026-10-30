@@ -45,7 +45,7 @@ function readDashboardData_() {
   const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   const potential = readTable_(ss, SHEET_NAMES.potential, 8, 0);
   const collaborated = readTable_(ss, SHEET_NAMES.collaborated, 8, 0);
-  const groups = readTable_(ss, SHEET_NAMES.groups, 4, 0);
+  const groups = readTable_(ss, SHEET_NAMES.groups, 3, 0);
   const strategy = readStrategy_(ss, SHEET_NAMES.strategy);
 
   return {
