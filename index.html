@@ -683,10 +683,10 @@ loadDashboardData(data => {
   const strategyLines = (data.strategy || []).map(x => String(x.section || x.detail || '').trim()).filter(Boolean);
   const priorityLines = strategyLines.filter(line => /^\d+\./.test(line));
   const PRIOS = priorityLines.map(line => {
-    const body = line.replace(/^\\d+\\.\\s*/, '');
+    const body = line.replace(/^\d+\.\s*/, '');
     const arrow = body.split('→');
-    const brands = [...body.matchAll(/\\(([^)]*)\\)/g)].flatMap(match => match[1].split(',').map(x => x.trim()).filter(Boolean));
-    const title = body.replace(/\\s*\\([^)]*\\)/g, '').replace(/\\s*→.*$/, '').trim();
+    const brands = [...body.matchAll(/\(([^)]*)\)/g)].flatMap(match => match[1].split(',').map(x => x.trim()).filter(Boolean));
+    const title = body.replace(/\s*\([^)]*\)/g, '').replace(/\s*→.*$/, '').trim();
     return {t: title || body, w: (arrow[1] || '').trim(), b: brands};
   }).filter(p => p.t);
   const resolveBrand = name => {
