@@ -24,7 +24,7 @@ input,select{font:inherit;padding:10px 12px;border-radius:12px;border:1px solid 
   <p class="meta" id="meta">Cargando datos del Google Sheet…</p>
   <dl class="kpis" id="kpis"></dl>
   <div class="card">
-    <h2 style="margin:0 0 12px">Seguimiento</h2>
+    <h2 style="margin:0 0 12px">Seguimiento (han respondido)</h2>
     <div id="replies"></div>
   </div>
   <div class="card">
@@ -38,13 +38,17 @@ input,select{font:inherit;padding:10px 12px;border-radius:12px;border:1px solid 
   </div>
 </div>
 <script src="data_pot_0.js"></script>
-<script src="data_pot_1.js"></script>
-<script src="data_pot_2.js"></script>
-<script src="data_pot_3.js"></script>
+<script src="data_pot_1a.js"></script>
+<script src="data_pot_1b.js"></script>
+<script src="data_pot_2a.js"></script>
+<script src="data_pot_2b.js"></script>
+<script src="data_pot_3a.js"></script>
+<script src="data_pot_3b.js"></script>
 <script src="data_pot_4.js"></script>
 <script src="data_pot_5.js"></script>
 <script src="data_pot_6.js"></script>
-<script src="data_pot_7.js"></script>
+<script src="data_pot_7a.js"></script>
+<script src="data_pot_7b.js"></script>
 <script src="data_pot_8.js"></script>
 <script src="data_col.js"></script>
 <script src="data_grp.js"></script>
@@ -72,8 +76,8 @@ input,select{font:inherit;padding:10px 12px;border-radius:12px;border:1px solid 
     ['Ya colaboraron',counts.YC||0],
     ['Potencial',counts.P||0]
   ].map(([k,v])=>'<div class="kpi"><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('');
-  const replies=all.filter(r=>r.est==='CR');
-  document.getElementById('replies').innerHTML=replies.length?replies.map(r=>'<div class="row"><b>'+r.name+'</b> <span class="meta">'+r.fecha+'</span><br><span style="font-size:.9rem">'+r.notas+'</span></div>').join(''):'<p class="meta">Sin respuestas aún en los datos cargados.</p>';
+  const replies=all.filter(r=>r.est==='CR'||r.est==='NI');
+  document.getElementById('replies').innerHTML=replies.length?replies.map(r=>'<div class="row"><b>'+r.name+'</b> <span class="pill"><span class="dot" style="background:'+STC[r.est]+'"></span>'+ST[r.est]+'</span> <span class="meta">'+r.fecha+'</span><br><span style="font-size:.9rem">'+r.notas+'</span></div>').join(''):'<p class="meta">Sin respuestas aún en los datos cargados.</p>';
   const fEst=document.getElementById('fEst');
   STORDER.forEach(s=>{if(counts[s]){const o=document.createElement('option');o.value=s;o.textContent=ST[s]+' ('+counts[s]+')';fEst.appendChild(o);}});
   function render(){
@@ -84,7 +88,7 @@ input,select{font:inherit;padding:10px 12px;border-radius:12px;border:1px solid 
     if(term)list=list.filter(r=>[r.name,r.cat,r.notas,r.email].join(' ').toLowerCase().includes(term));
     list.sort((a,b)=>STORDER.indexOf(a.est)-STORDER.indexOf(b.est)||a.name.localeCompare(b.name));
     document.getElementById('count').textContent=list.length+' marcas';
-    document.getElementById('rows').innerHTML=list.map(r=>'<div class="row"><b>'+r.name+'</b> <span class="pill"><span class="dot" style="background:'+STC[r.est]+'"></span>'+ST[r.est]+'</span> <span class="meta">'+(r.fecha||'')+'</span><br><span class="meta">'+r.cat+'</span>'+(r.notas?'<br><span style="font-size:.85rem">'+r.notas.slice(0,180)+(r.notas.length>180?'…':'')+'</span>':'')+'</div>').join('');
+    document.getElementById('rows').innerHTML=list.map(r=>'<div class="row"><b>'+r.name+'</b> <span class="pill"><span class="dot" style="background:'+STC[r.est]+'"></span>'+ST[r.est]+'</span> <span class="meta">'+(r.fecha||'')+'</span><br><span class="meta">'+r.cat+'</span>'+(r.notas?'<br><span style="font-size:.85rem">'+r.notas.slice(0,200)+(r.notas.length>200?'…':'')+'</span>':'')+'</div>').join('');
   }
   document.getElementById('q').addEventListener('input',render);
   fEst.addEventListener('change',render);
