@@ -683,18 +683,26 @@ loadDashboardData(data => {
   const strategyLines = (data.strategy || []).map(x => String(x.section || x.detail || '').trim()).filter(Boolean);
   const priorityLines = strategyLines.filter(line => /^\d+\./.test(line));
   const PRIOS = priorityLines.map(line => {
-    const body = line.replace(/^\d+\.\s*/, '');
-    const match = /^(.*?)\s*\(([^)]*)\)\s*(?:→\s*(.*))?$/.exec(body);
-    return {t: match ? match[1].trim() : body, w: match && match[3] ? match[3].trim() : '', b: match ? match[2].split(',').map(x => x.trim()).filter(Boolean) : []};
+    const body = line.replace(/^\\d+\\.\\s*/, '');
+    const arrow = body.split('→');
+    const brands = [...body.matchAll(/\\(([^)]*)\\)/g)].flatMap(match => match[1].split(',').map(x => x.trim()).filter(Boolean));
+    const title = body.replace(/\\s*\\([^)]*\\)/g, '').replace(/\\s*→.*$/, '').trim();
+    return {t: title || body, w: (arrow[1] || '').trim(), b: brands};
   }).filter(p => p.t);
+  const resolveBrand = name => {
+    const key = String(name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    return byName.get(name) || all.find(r => r.name.toLowerCase().replace(/[^a-z0-9]/g, '') === key) ||
+      all.find(r => r.name.toLowerCase().replace(/[^a-z0-9]/g, '').startsWith(key));
+  };
   const brandChip = name => {
-    const r = byName.get(name);
+    const r = resolveBrand(name);
+    const shownName = r ? r.name : name;
     const c = r ? stOf(r).c : 'var(--st-p)';
     const lbl = r ? stOf(r).label : 'No está en la hoja';
-    return '<button type="button" class="chip" data-open="' + esc(name) + '" title="' + esc(lbl) + '" aria-label="' + esc(name + ', ' + lbl) + '"><i class="dot" style="background:' + c + '"></i>' + esc(name) + '</button>';
+    return '<button type="button" class="chip" data-open="' + esc(shownName) + '" title="' + esc(lbl) + '" aria-label="' + esc(shownName + ', ' + lbl) + '"><i class="dot" style="background:' + c + '"></i>' + esc(shownName) + '</button>';
   };
   $('#prios').innerHTML = PRIOS.map((p, i) => {
-    const done = p.b.filter(n => { const r = byName.get(n); return r && r.est !== 'P'; }).length;
+    const done = p.b.filter(n => { const r = resolveBrand(n); return r && r.est !== 'P'; }).length;
     return '<li class="prio"><span class="num">' + (i + 1) + '</span><span class="pt">' + p.t + '</span>' +
       (p.w ? '<span class="pw">' + p.w + '</span>' : '<span></span>') +
       '<div><div class="chips">' + p.b.map(brandChip).join('') + '</div><p class="progress">' + done + ' de ' + p.b.length + ' contactadas o con colaboración</p></div></li>';
