@@ -623,7 +623,16 @@ loadDashboardData(data => {
   contacted.forEach(r => { const k = r.date.getTime(); dayMap.set(k, (dayMap.get(k) || 0) + 1); });
   const dKeys = [...dayMap.keys()].sort((a, b) => a - b);
   const allDays = [];
-  if (dKeys.length) for (let t = dKeys[0]; t <= dKeys[dKeys.length - 1]; t += 864e5) allDays.push(t);
+  if (dKeys.length) {
+    const cursor = new Date(dKeys[0]);
+    const lastDay = new Date(dKeys[dKeys.length - 1]);
+    cursor.setHours(0, 0, 0, 0);
+    lastDay.setHours(0, 0, 0, 0);
+    while (cursor <= lastDay) {
+      allDays.push(cursor.getTime());
+      cursor.setDate(cursor.getDate() + 1);
+    }
+  }
   const maxDay = Math.max(...dayMap.values(), 1);
   const dayFills = [];
   $('#dayBars').innerHTML = allDays.map(t => {
