@@ -220,7 +220,7 @@ footer{padding:36px 20px 56px;color:var(--muted);font-size:.8rem;max-width:1180p
 <header class="wrap top">
   <h1>Colabs de @pauliiguerra</h1>
   <p class="lead">Marcas potenciales, contactos enviados y respuestas</p>
-  <p class="meta">Datos de la hoja «Marcas Potenciales Colab Pauli» a 29 de octubre de 2026</p>
+  <p class="meta">Datos en directo de «Marcas Potenciales Colab Pauli»</p>
   <dl class="kpis" id="kpis"></dl>
 </header>
 
@@ -304,12 +304,7 @@ footer{padding:36px 20px 56px;color:var(--muted);font-size:.8rem;max-width:1180p
         </article>
         <article class="card">
           <h3>Consejos de outreach</h3>
-          <ul class="tips">
-            <li>Mencionar colaboraciones previas exitosas (Fuze Tea, BBVA).</li>
-            <li>Ofrecer contenido auténtico de vanlife y métricas de engagement (~2,25&nbsp;% ER, media de 5,8 mil me gusta).</li>
-            <li>Proponer paquetes: reel, stories, post estático y UGC.</li>
-            <li>Enfocarse en valores: autenticidad, naturaleza, minimalismo y aventura real.</li>
-          </ul>
+          <ul class="tips" id="tipsList"></ul>
         </article>
         <article class="card">
           <h3>Cómo llegar a las marcas aún no contactadas</h3>
@@ -359,438 +354,39 @@ footer{padding:36px 20px 56px;color:var(--muted);font-size:.8rem;max-width:1180p
   Fuente: Google Sheet «Marcas Potenciales Colab Pauli» (pestañas «Marcas Potenciales», «Marcas Colaboradas», «Grupos empresariales» y «Notas y Estrategia»), leída el 29 de octubre de 2026. El sector, la vía de contacto y el tipo de aviso son agrupaciones hechas para este dashboard a partir de las columnas de la hoja. Los cambios posteriores en la hoja no se reflejan aquí.
 </footer>
 
-<!-- Datos: sector|marca|categoría|contacto|estado|fecha|grupo|email|notas -->
-<script type="text/plain" id="dataPot">
-V|Siesta Campers|Alquiler Campers / Vanlife|Colaboraciones Instagram|CP|29/10||collaborations@siestacampers.com (también formulario en siestacampers.com/blog/how-to-collaborate-with-siesta-campers)|Contacto inicial enviado. Gancho: rutas España/Portugal + prueba social Bluetti/Grandvalira. Fit 5/5.
-J|Holafly|eSIM / Conectividad viajes|Programa de afiliados / Colabs|P|||Sin email público de colabs. Formulario de afiliados: esim.holafly.com/es/programa-afiliados/|eSIM ideal para viajeros. Colaboran mucho con travel influencers, incluso micro.
-J|Airalo|eSIM / Conectividad|Partner Hub / Afiliados|CP|29/10||affiliates@airalo.com (afiliados y colaboraciones de marca)|Contacto inicial enviado. Auto-respuesta recibida. Fit 4/5.
-T|Insta360|Cámaras de acción / Contenido|Creator program|P|||Sin email público de colabs. Formulario del programa Rising Talents: insta360.com/rising-talents|Cámaras ideales para vanlife, MTB y travel content. Programa abierto de creadores.
-T|GoPro|Cámaras de acción|GoPro Creator / Affiliates|P|||Sin email. Formulario de patrocinios en gopro.com/sponsorship (prensa: pr@gopro.com)|Clásico para outdoor y aventura. Contenido de MTB y viajes.
-E|EcoFlow|Energía portátil / Power stations|Colaboraciones / Affiliates|CP|25/10||Enviado a: Influencer@ecoflow.com|Propuesta enviada, sin respuesta. Ojo: competidor de Bluetti. Power stations muy usadas en vanlife para autonomía energética.
-E|BioLite|Outdoor gear / Cocina y luz portátil|Colaboraciones|P|||Sin email de colabs. Afiliados vía Partnerize (bioliteenergy.com/pages/biolite-affiliate-program); soporte: support@bioliteenergy.com. BioLite y Goal Zero son ahora la misma empresa|Productos sostenibles para outdoor y camp. Muy alineado con naturaleza.
-C|Decathlon / Quechua|Outdoor gear / Ropa y material|Influencer / PR España|P|||Sin email visible. Formulario de prensa/colaboraciones en saladeprensa.decathlon.es/contacto; programa de creadores 'Decathlon Factory'|Marca muy fuerte en España para hiking, MTB y camping. Accesible.
-R|Patagonia|Ropa outdoor sostenible|Ambassador / Collabs|P|||press@patagonia.com (prensa, países sin agencia local como España). Ojo: no pagan a influencers, trabajan con embajadores activistas|Marca premium sostenible, valores de naturaleza y minimalismo. Alto fit cultural.
-R|The North Face|Ropa y equipo outdoor|Creator program|CP|22/10|VF Corporation|Enviado a: TheNorthFace@OutsidePR.com; partnerships@thenorthface.com|Propuesta enviada, sin respuesta. Clásico outdoor, buena para hiking y travel.
-F|IATI Seguros|Seguros de viaje|Colaboraciones travel|CP|29/10||partners@iatiseguros.com (programa de colaboradores; formulario en iatiseguros.com/alta-colaboradores/)|Contacto inicial enviado. Fit 4/5.
-E|Anker|Cargadores y power banks|Creator / Affiliates|CP|29/10||influencer@anker.com (influencers y partnerships; afiliados: affiliate@anker.com)|Contacto inicial enviado. Fit 4/5.
-T|Peak Design|Bolsas y accesorios foto/travel|Ambassador program|P|||No encontrado email de colabs. Mejor DM en Instagram @peakdesign o LinkedIn|Productos premium para creadores de contenido y viajeros.
-T|DJI|Drones y acción|Creator program|CP|29/10||KOL@influencer.dji.com (influencers) y global-creator@dji.com (colaboración con creadores)|Contacto inicial enviado. Fit 5/5.
-R|Salomon|Calzado y equipo trail/MTB|Influencer|P||Amer Sports|No encontrado. Recluta embajadores por Instagram y eventos; mejor DM o LinkedIn|Ideal para MTB y hiking. Marca técnica outdoor.
-R|Merrell|Calzado outdoor|Collabs|P||Wolverine Worldwide|Affiliates.EU@wwwinc.com (afiliados Europa, indicado en su web española); general: info@merrell.eu|Calzado cómodo y resistente para viajes y naturaleza.
-C|Black+Blum|Vajilla y botellas reutilizables|Colaboraciones|P|||influencer@black-blum.com (colaboraciones con influencers)|Productos sostenibles y prácticos para vida en furgo y viajes.
-E|Goal Zero|Energía solar portátil|Creator|CP|23/10||Enviado a: pr@goalzero.com; support@goalzero.com|Propuesta enviada, sin respuesta. Ojo: misma empresa que BioLite y competidor de Bluetti. Solar panels y power, perfecto para vanlife off-grid.
-V|People Camper|Camperización / Alquiler|Colaboraciones España|P|||peoplecamper@gmail.com (contacto general)|Especialistas en camperizar Volkswagen y similares en España.
-V|Furgocasa|Alquiler campers gran volumen|Colaboraciones creadores|P|||info@furgocasa.com (página para creadores: furgocasa.com/es/creadores-de-contenido)|Buscan creadores de contenido camper en España (Murcia, Madrid, etc.).
-A|NordVPN o Surfshark|VPN / Privacidad viajes|Affiliate / Creator|P||Nord Security|Programas de afiliados abiertos|Útil para viajeros que se conectan a redes públicas.
-A|Canva|Diseño / Contenido|Creator program|P|||strategic-partnerships@canva.com (avisan de que sus programas de patrocinio están cerrados ahora)|Herramienta útil para creadores. Programa de embajadores activo.
-V|Yescapa|Alquiler campers entre particulares|Colaboraciones / PR|P|||No encontrado email de colabs con creadores (su página de partners es para empresas). Probar por DM en Instagram @yescapa|Plataforma de alquiler de campers entre particulares muy usada en España. Fit directo con vanlife.
-V|Roadsurfer|Alquiler campers|Colaboraciones creadores|P|||Sin email público para creadores. Formulario: roadsurfer.com/cooperations/ (brandpartner@roadsurfer.com es solo para marcas)|Alquiler de campers con bases en España; trabaja mucho con creadores de viajes.
-V|Indie Campers|Alquiler campers|Partnerships|P|||influencer.collaboration@indiecampers.com (o formulario más rápido: ambassador.upfluence.co/indie_campers)|Fuerte en España y Portugal. Encaja con rutas por la península.
-V|Park4night|App vanlife|Colaboraciones|P|||contact@park4night.com (contacto general, no específico de colabs)|App de referencia para encontrar sitios donde dormir en furgo. Integración muy natural en el contenido.
-V|Dometic|Equipamiento camper (neveras, toldos)|PR / Creators|CP|22/10|Dometic Group|Enviado a: contact.eu@dometic.com|Propuesta enviada, sin respuesta (incluye Front Runner). Neveras portátiles y equipamiento de furgo. Producto muy demostrable.
-V|Thule|Portabicis y portaequipajes|Creators / PR|CP|25/10||Enviado a: press@thule.com|Propuesta enviada, sin respuesta. Portabicis para la furgo: une vanlife y MTB en un mismo contenido.
-F|Heymondo|Seguros de viaje|Afiliados / Colaboraciones|P|||Sin email visible. Formulario de afiliados: heymondo.es/programa-de-afiliados/|Competidor de IATI, muy activo con viajeros españoles. Contactar uno u otro, no ambos a la vez.
-F|Revolut|Banca / pagos en viaje|Afiliados / Creators|P|||creatorclub@revolut.com (Revolut Creator Club). Ojo: posible conflicto con BBVA|Tarjeta para pagar en el extranjero. Ojo: posible conflicto con BBVA, revisar exclusividades antes.
-F|Wise|Pagos internacionales|Afiliados|P|||partnerwise@wise.com (equipo de partners); solicitud de influencer en wise.com/partner/influencers. Ojo: posible conflicto con BBVA|Tarjeta multidivisa para viajes. Mismo aviso de conflicto con BBVA.
-B|Orbea|Bicicletas MTB|PR / Embajadores|CR|22/10||Enviado a: orbea.eu@orbea.com|Respondieron: trasladan la propuesta al equipo correspondiente. Pendiente de que ese equipo conteste. Marca vasca de bicis, muy fuerte en MTB.
-B|Mondraker|Bicicletas MTB|PR / Embajadores|CR|22/10||Enviado a: marketing@mondraker.com|Respondieron: piden el dossier de colaboración antes de concertar una llamada. PRÓXIMO PASO: enviar dossier. Marca española de MTB.
-A|Komoot|App rutas outdoor|Creator / Colecciones|P|||Sin email. Ahora no buscan nuevos creadores; formulario para entrar en su 'content creator pool' (support.komoot.com)|App de rutas de MTB y senderismo; permite publicar colecciones de rutas propias.
-T|Garmin|Relojes GPS / navegación|PR / Embajadores|P|||info.spain@garmin.com (contacto general España). OJO: hay webs falsas de 'Garmin' con emails @outlook.com, no usarlas|Relojes y GPS para MTB y hiking. Marca técnica con presupuesto de creadores.
-R|Ternua|Ropa outdoor sostenible|PR / Colaboraciones|P|||infor@ternua.com (contacto general). Prensa y comunicación en ternua.com/es/news-press|Marca vasca outdoor sostenible. Alternativa más accesible a Patagonia.
-R|Ecoalf|Moda sostenible|PR / Colaboraciones|P|||bjames@ecoalf.com (contacto de prensa publicado en su web); general: contacto@ecoalf.com|Marca española con materiales reciclados. Valores de sostenibilidad y naturaleza.
-C|Stanley|Termos y botellas|PR / Creators|P|||social@stanley1913.com (redes e influencers)|Termos y tazas para camping y furgo. Muy visual en Reels.
-C|LifeStraw|Filtros de agua portátiles|Colaboraciones|P|||support@lifestraw.com (gestiona también afiliados y prensa); programa de afiliados en su web|Útil en rutas y vanlife off-grid. Mensaje de sostenibilidad.
-C|Naturehike|Material de camping|Creator program|P|||support@naturehike.com (atención al cliente, no específico de colabs)|Material de camping ligero y económico, popular entre viajeros.
-N|226ERS|Nutrición deportiva|Embajadores / Afiliados|P|||info@226ers.com (contacto general). Tienen programa de embajadores en su web|Marca española de nutrición para MTB y deporte outdoor.
-V|Camperdays|Comparador alquiler campers|Afiliados / Colaboraciones|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Comparador de alquiler de campers y autocaravanas. Encaja con rutas en furgo.
-V|Goboony|Alquiler campers entre particulares|Colaboraciones / PR|P|||business@goboony.co.uk (afiliados vía Tradedoubler). Goboony y Yescapa se fusionaron: contactar solo una|Alternativa a Yescapa con presencia en Europa.
-V|McRent|Alquiler autocaravanas|PR / Colaboraciones|P||Erwin Hymer Group|press@erwinhymergroup.com (prensa del Erwin Hymer Group, dueño de McRent). Mismo grupo que Hymer|Alquiler de autocaravanas con bases en España.
-V|Volkswagen California|Furgonetas camper|PR / Embajadores|P|||volkswagen-comerciales.es (verificar)|La camper de referencia. Marca aspiracional para vanlife.
-V|Ford Nugget|Furgonetas camper|PR / Embajadores|P|||ford.es (verificar)|Competidora directa de la VW California.
-V|Dacia|Coches / Sleep Pack|PR / Creators|P||Renault Group|dacia.es (verificar)|Accesorio Sleep Pack para dormir en el coche. Ángulo de vanlife low-cost.
-V|Westfalia|Camperización|PR / Colaboraciones|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Marca histórica de camperización. Contenido nostálgico y de diseño.
-V|Truma|Calefacción y equipamiento camper|PR / Creators|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Calefacción para la furgo. Ideal para contenido de vanlife en invierno.
-V|Fiamma|Toldos y accesorios camper|PR / Colaboraciones|P|||No encontrado. Su web remite a distribuidores locales; mejor DM en Instagram o LinkedIn|Toldos, portabicis y accesorios para furgo.
-E|Victron Energy|Baterías y sistemas solares camper|PR / Colaboraciones|CP|22/10||Enviado a: marketing@victronenergy.com|Propuesta enviada, sin respuesta. Instalaciones eléctricas de furgo. Contenido técnico de autonomía.
-E|Renogy|Paneles solares|Afiliados / Creators|CP|22/10||Enviado a: partnerships@renogy.com|Propuesta enviada, sin respuesta. Ojo: placas solares, posible roce con Bluetti. Paneles solares para furgo off-grid.
-E|Jackery|Power stations|Afiliados / Creators|CP|27/10||Enviado a: marketing@jackery.com|Propuesta enviada, sin respuesta. Ojo: competidor de Bluetti y EcoFlow.
-C|Campingaz|Cocina de camping|PR / Colaboraciones|P||Coleman Company|info.iberia@coleman.eu (Coleman/Campingaz España y Portugal, general). Misma empresa que Coleman|Hornillos y cocina portátil. Muy conocida en España.
-C|Coleman|Material de camping|PR / Colaboraciones|P||Coleman Company|info.iberia@coleman.eu (Coleman/Campingaz España y Portugal, general). Misma empresa que Campingaz|Material clásico de camping: neveras, sillas, iluminación.
-V|ACSI|Tarjeta de descuento campings|Afiliados / Colaboraciones|P|||marketing@acsi.eu (programa de afiliados vía Tradetracker); colaboraciones con formulario en acsi.eu|Tarjeta de descuentos en campings de Europa. Útil fuera de temporada.
-V|Campercontact|App áreas de autocaravanas|Colaboraciones|P|||info@campercontact.com (general). Otras consultas de negocio: e.dejong@campercontact.com|App de áreas para autocaravanas. Alternativa a Park4night.
-T|Starlink|Internet por satélite|PR (verificar si colabora)|P|||starlink.com (verificar)|Internet en la furgo en zonas remotas. Puede no tener programa de creadores.
-V|Kampaoh|Glamping en España|Colaboraciones / PR|P|||creators@kampaoh.com (usado en sus convocatorias de creadores)|Glamping en campings de España. Contenido de escapadas.
-A|Wikiloc|App de rutas|Colaboraciones / PR|P|||No encontrado email público. Solo soporte en ayuda.wikiloc.com; mejor DM en Instagram o LinkedIn|App española de rutas de senderismo y MTB. Fit local muy alto.
-A|AllTrails|App de rutas|Creators / Afiliados|P|||Sin email. Programa de embajadores Trailheads (formulario en alltrails.com)|App internacional de rutas. Alternativa a Komoot y Wikiloc.
-A|Strava|App de deporte|Creators / PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Registro de rutas de MTB y deporte. Muy usada por ciclistas.
-A|Polarsteps|App diario de viaje|Creators / Colaboraciones|P|||hello@polarsteps.com (contacto general)|Registra el recorrido del viaje en un mapa. Muy visual para contenido.
-A|Duolingo|App de idiomas|Creators / PR|P|||partnerships@duolingo.com (aparece en directorios, no confirmado en su web oficial)|Aprender idiomas para viajar. Hace mucho contenido con creadores.
-B|Specialized|Bicicletas MTB|PR / Embajadores|CP|22/10||Enviado a: PR@specialized.com|Propuesta enviada, sin respuesta. Marca top de MTB. Más difícil de conseguir, pero alto valor.
-B|Trek|Bicicletas MTB|PR / Embajadores|P|||Sin email. Programa de embajadores con formulario (visto en la web de Trek ANZ); en España, mejor vía tienda Trek o LinkedIn|Gran marca de bicis con red de tiendas en España.
-B|Canyon|Bicicletas MTB|PR / Embajadores|CP|22/10||Enviado a: us@canyon.com|Propuesta enviada, sin respuesta. Si no contestan, probar press@canyon.com (prensa Europa). Venta online de bicis.
-B|Santa Cruz Bicycles|Bicicletas MTB|PR / Embajadores|CP|22/10|Pon Holdings|Enviado a: info@santacruzbicycles.com; press@santacruzbicycles.com|Propuesta enviada, sin respuesta. Marca premium de MTB muy aspiracional.
-B|Scott|Bicicletas y equipo|PR / Embajadores|P|||Sin email. Formulario de Scott España en scott-sports.com; mejor LinkedIn (Marketing Manager de Scott España)|Bicis, cascos y ropa. Abarca MTB y montaña.
-B|BH Bikes|Bicicletas MTB|PR / Embajadores|P|||info@bhbikes.com (contacto general)|Marca vasca de bicis. Buen fit local.
-B|MMR Bikes|Bicicletas MTB|PR / Embajadores|P|||cac@slsbikes.com (contacto general / atención al cliente)|Marca asturiana de bicis. Más accesible para colaborar.
-B|Fox Racing|Ropa y protecciones MTB|PR / Creators|P||Revelyst (antes Vista Outdoor)|customerservice.eu@foxracing.com (general Europa); afiliados vía CJ Affiliate|Ropa y protecciones de MTB muy reconocibles.
-B|POC|Cascos y gafas|PR / Embajadores|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Cascos y protecciones de MTB de diseño escandinavo.
-B|Endura|Ropa de ciclismo|PR / Creators|P|||No encontrado email de colabs. Endura es de Pentland Brands (mismo grupo que Berghaus)|Ropa técnica de MTB, buena relación calidad-precio.
-B|Shimano|Componentes y calzado ciclismo|PR / Embajadores|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Componentes y zapatillas de MTB. Marca técnica de referencia.
-R|Oakley|Gafas deportivas|PR / Creators|P|||oakley.com (verificar)|Gafas para MTB y outdoor.
-B|100%|Gafas y guantes MTB|PR / Creators|P|||100percent.com (verificar)|Gafas y accesorios de MTB y motocross.
-C|CamelBak|Hidratación|PR / Creators|P||Revelyst (antes Vista Outdoor)|contact.uk@camelbak.com (general). Su sede europea está en El Prat de Llobregat (Barcelona), tel. +34 931 458 000|Mochilas de hidratación para MTB y senderismo.
-R|Arc'teryx|Ropa outdoor premium|PR / Embajadores|CP|26/10|Amer Sports|Enviado a: media@arcteryx.com|Propuesta enviada, sin respuesta. Marca premium muy aspiracional.
-R|Columbia|Ropa outdoor|PR / Creators|P||Columbia Sportswear Company|corporativo@notabene.es (agencia de prensa de Columbia en España); afiliados en columbiasportswear.es|Ropa outdoor accesible con presencia en España.
-R|Mammut|Ropa y equipo de montaña|PR / Embajadores|P|||Sin email visible. Formulario de contacto en mammut.com|Marca suiza de montaña. Buena para hiking.
-R|Fjällräven|Ropa y mochilas outdoor|PR / Creators|P||Fenix Outdoor|info@fjallraven.se (su web lo indica para marketing y colaboraciones); prensa: press@fjallraven.com|Mochilas Kånken muy populares entre viajeros.
-R|Helly Hansen|Ropa outdoor y náutica|PR / Creators|P|||No encontrado email de colabs (solo atención al cliente). Mejor LinkedIn (equipo de Brand Partnerships)|Ropa técnica para lluvia y frío.
-R|Vaude|Ropa outdoor sostenible|PR / Colaboraciones|P|||No encontrado email de colabs. Ojo: Vaude avisa de emails falsos que ofrecen colabs de influencer en su nombre|Marca alemana con foco en sostenibilidad. Encaja con sus valores.
-R|Picture Organic Clothing|Ropa outdoor sostenible|PR / Embajadores|P|||contact@picture-organic-clothing.com (contacto general)|Marca francesa de ropa outdoor con materiales sostenibles.
-R|Trangoworld|Ropa de montaña|PR / Colaboraciones|P|||info@trangoworld.com (contacto general). Tienen sección de Embajadores en su web|Marca española de montaña. Accesible para colaborar.
-R|Buff|Tubulares y accesorios|PR / Creators|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Marca catalana muy conocida en outdoor.
-R|Icebreaker|Ropa de merino|PR / Creators|P||VF Corporation|No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Ropa de merino que no huele: ideal para vida en furgo.
-M|Osprey|Mochilas|PR / Creators|P||Helen of Troy|affiliates@vervaunt.com (agencia de afiliados de Osprey Europe; 10% para creadores). Misma agencia que Hydro Flask|Mochilas de trekking y viaje de referencia.
-M|Deuter|Mochilas|PR / Creators|P||Schwan-STABILO|info@deuterusa.com (contacto general, oficina EE. UU.)|Mochilas de trekking y MTB. Alternativa a Osprey.
-C|Black Diamond|Material de montaña|PR / Embajadores|CP|23/10||Enviado a: corporate@bdel.com|Propuesta enviada, sin respuesta. Si no contestan, probar info@blackdiamond.eu (Europa). Frontales, bastones y material de montaña.
-C|Petzl|Frontales e iluminación|PR / Colaboraciones|P|||info@petzl.com (contacto general) o formulario en petzl.com|Frontales para camping y rutas nocturnas.
-R|Hoka|Calzado trail|PR / Creators|P||Deckers Brands|Sin email. Afiliados en Europa vía Awin|Zapatillas de trail muy populares.
-R|La Sportiva|Calzado de montaña|PR / Embajadores|P|||marketing@lasportivausa.com (marketing, oficina Norteamérica)|Calzado técnico de montaña y trail.
-R|Keen|Calzado outdoor y sandalias|PR / Creators|P|||marketing.us@keenfootwear.com (eventos y patrocinios, oficina EE. UU.)|Sandalias y botas para viajes y naturaleza.
-R|Vivobarefoot|Calzado barefoot|Afiliados / Creators|P|||affiliates@vivobarefoot.com (afiliados e influencers, vía Awin)|Calzado minimalista. Encaja con vida simple.
-R|Veja|Zapatillas sostenibles|PR (verificar)|P|||No encontrado. Ojo: Veja no paga a influencers por publicidad; solo relación orgánica|Zapatillas sostenibles. Encaja con valores, aunque es más urbana.
-C|Hydro Flask|Botellas térmicas|PR / Creators|P||Helen of Troy|affiliates@vervaunt.com (agencia de afiliados de Hydro Flask; 10% para creadores). Misma agencia que Osprey|Alternativa a Stanley. Elegir una de las dos.
-C|Sea to Summit|Material de camping ligero|PR / Colaboraciones|P|||info@seatosummit.de (contacto general Europa)|Sacos, esterillas y accesorios de camping ligeros.
-C|Jetboil|Hornillos portátiles|PR / Creators|P|||Sin email. Jetboil Ambassador Program (formulario en jetboil.johnsonoutdoors.com)|Hornillos compactos para rutas. Muy demostrable.
-R|Hawkers|Gafas de sol|Afiliados / Creators|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn (equipo de Influencer Marketing en Madrid)|Marca española de gafas que trabaja mucho con influencers.
-S|Pukas|Surf y ropa|PR / Colaboraciones|CP|22/10||Enviado a: info@pukas.com|Propuesta enviada, sin respuesta. Ojo: el email de su web es info@pukassurf.com; si rebota, reenviar ahí. Marca vasca de surf.
-R|Skunkfunk|Moda sostenible|PR / Colaboraciones|P|||marketing@skunkfunk.com (marketing y prensa); general: info@skunkfunk.com|Marca vasca de moda sostenible.
-R|Thinking Mu|Moda sostenible|PR / Colaboraciones|P|||shop@thinkingmu.com (contacto general)|Marca barcelonesa de ropa orgánica.
-M|Lefrik|Mochilas recicladas|PR / Colaboraciones|P|||info@lefrik.com (contacto general). Tienen programa de afiliados en su web|Mochilas de materiales reciclados. Encaja con sostenibilidad.
-M|Hemper|Mochilas de cáñamo|Colaboraciones|P|||hola@hemperstore.com (contacto general)|Marca de mochilas de cáñamo hechas a mano.
-M|Bellroy|Carteras y accesorios de viaje|Afiliados / Creators|P|||Sin email. Formulario para creadores en bellroy-connect.creatoriq.com/connect/; afiliados vía Rakuten|Carteras y organizadores de viaje de diseño.
-T|Sony|Cámaras|PR / Creators|P|||tania.burgueno@sony.com (Marketing & Communications Head Sony Iberia, en su sala de prensa)|Cámaras para creadores (vlog, mirrorless).
-T|Fujifilm|Cámaras|PR / Embajadores|P|||info_ffes@fujifilm.com (Fujifilm España, general). Programa Fujifilm Creators|Cámaras con estética muy de viaje y fotografía analógica.
-T|Rode|Micrófonos|PR / Creators|P|||Sin email visible. Patrocinios por el formulario de contacto de rode.com|Micrófonos para vídeo. Útil para contenido hablado.
-T|SanDisk|Tarjetas y almacenamiento|PR / Creators|P|||sandisk.com (verificar)|Tarjetas de memoria y discos para guardar contenido en viaje.
-T|Shokz|Auriculares deportivos|Afiliados / Creators|P|||affiliate@shokz.com (programa de afiliados)|Auriculares de conducción ósea para MTB y senderismo.
-T|PolarPro|Filtros y accesorios foto|Afiliados / Creators|P|||media@polarpro.com; programa de embajadores 'Gold Filter Crew' (polarpro.com)|Filtros para cámara y drone.
-T|SmallRig|Accesorios de grabación|Creator program|P|||affiliate@smallrig.com (afiliados); rigstudio@smallrig.com (proyectos de vídeo pagados para creadores)|Accesorios para montar cámaras. Programa de creadores.
-A|Adobe Lightroom|Edición de fotos|Creators / Afiliados|P|||adobe.com (verificar)|Edición de fotos. Contenido de "cómo edito mis fotos".
-A|CapCut|Edición de vídeo|Creator program|P|||capcut.com (verificar)|Editor de vídeo muy usado para Reels.
-A|Epidemic Sound|Música para creadores|Afiliados / Creators|P|||collaborations@epidemicsound.com (colaboraciones con creadores)|Música sin derechos para vídeos. Programa de afiliados.
-A|Artlist|Música y stock para creadores|Afiliados / Creators|P|||Sin email. Artlist Ambassador Program (solicitud en help.artlist.io)|Alternativa a Epidemic Sound. Elegir una.
-T|Coros|Relojes GPS|PR / Embajadores|P|||sales@coros.com (partners) / press@coros.com (prensa). Contacto general, no específico de creadores|Relojes GPS para outdoor. Alternativa a Garmin.
-T|Suunto|Relojes GPS|PR / Embajadores|P|||Sin email de creadores. Suunto Pro Club y programa de partners (formularios en suunto.com)|Relojes de montaña. Alternativa a Garmin y Coros.
-J|Booking.com|Alojamiento|Afiliados / Creators|P|||Sin email. Afiliados vía CJ o Awin (ya no tiene programa propio)|Alojamiento para viajes. Programa de afiliados.
-J|Airbnb|Alojamiento|PR / Creators|P|||Sin email. Programa Airbnb Creators (solicitud en su web); el programa de afiliados antiguo está cerrado|Alojamientos singulares. Muy visual para contenido.
-J|Skyscanner|Buscador de vuelos|Afiliados / PR|P|||Sin email. Skyscanner Creator Programme (formulario en partners.skyscanner.net)|Buscador de vuelos. Contenido de viajes baratos.
-J|GetYourGuide|Tours y actividades|Afiliados / Creators|P|||Sin email público. Solicitud al GetYourGuide Creator Community (formulario) o programa de afiliados|Actividades en destino. Buen programa de afiliados.
-J|Civitatis|Tours y actividades|Afiliados / Colaboraciones|P|||afiliados@civitatis.com. También programa Civitatis Creators (plataforma propia para creadores)|Empresa española de tours en español. Muy fuerte en España y LATAM.
-J|Hostelworld|Hostels|Afiliados / Creators|P|||Sin email visible. Afiliados en partners.hostelworld.com (Partnerize)|Hostels para viajeros jóvenes.
-J|BlaBlaCar|Coche compartido y bus|PR / Creators|P|||blablacar.es (verificar)|Viajar barato y compartido. Encaja con vida simple.
-J|Interrail|Pases de tren|PR / Creators|P|||press@interrail.com (creadores y medios; asunto 'Collaboration Request'). Pueden ofrecer pase gratis|Viajar en tren por Europa. Contenido de ruta.
-J|Worldpackers|Voluntariado por alojamiento|Afiliados / Embajadores|P|||Sin email. Envío de contenido en worldpackers.com/creators y programas pagados en worldpackers.com/programs|Viajar trabajando a cambio de alojamiento. Fuerte en LATAM.
-J|TrustedHousesitters|Cuidado de casas y mascotas|Afiliados / Creators|P|||Sin email actual. Afiliados vía Awin|Alojamiento gratis cuidando casas. Ángulo de viaje low-cost.
-J|Paradores|Hoteles|PR / Colaboraciones|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Hoteles en edificios históricos y naturaleza en España.
-D|Visit Portugal|Turismo / destino|PR / Campañas|P|||media@visitportugal.com (medios extranjeros, Turismo de Portugal)|Oficina de turismo de Portugal. Encaja con rutas por la península.
-D|Turismo de Asturias|Turismo / destino|PR / Campañas|P|||No encontrado email de prensa o creadores. Mejor DM en Instagram o LinkedIn|Destino de naturaleza muy fuerte para vanlife y MTB.
-D|Promperú|Turismo / destino LATAM|PR / Campañas|P|||Sin email. Hacen viajes de prensa e influencers (programa de PromPerú; España es mercado prioritario). Mejor LinkedIn (área de comunicación)|Turismo de Perú. Útil para llegar a audiencia LATAM.
-D|Visit Costa Rica|Turismo / destino LATAM|PR / Campañas|P|||Sin email. El ICT trabaja con influencers vía agencias de RR. PP. (MMGY); buscan perfil aventurero y de naturaleza|Destino de naturaleza y aventura.
-F|SafetyWing|Seguro para nómadas|Afiliados|P|||Sin email visible. Programa de embajadores en safetywing.com/ambassador. Ojo: seguro de viaje, elegir entre IATI/Heymondo/SafetyWing|Seguro para viajes largos. Compite con IATI y Heymondo.
-F|N26|Banca digital|Afiliados / Creators|P|||No encontrado email. Tienen equipo de afiliados e influencers para España en Madrid (LinkedIn). Ojo: conflicto con BBVA|Banca móvil para viajar. Ojo: posible conflicto con BBVA.
-N|Prozis|Nutrición deportiva|Afiliados / Embajadores|P|||Sin email público. Registro de afiliados en su web; embajadores por contacto con su equipo de marketing (LinkedIn)|Marca portuguesa con gran programa de influencers.
-N|HSN|Nutrición deportiva|Afiliados / Embajadores|P|||Sin email. Formulario de afiliados en hsnstore.com/colaboraciones/programa-afiliacion|Marca española de nutrición. Alternativa a Prozis y 226ERS.
-C|Wacaco|Cafeteras portátiles|Afiliados / Creators|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Espresso portátil: café en la furgo. Muy demostrable.
-N|ISDIN|Protección solar|PR / Creators|P|||consumercare.es@isdin.com (atención al cliente España, general)|Marca española de protección solar. Esencial al aire libre.
-V|Hymer|Autocaravanas y campers|PR / Colaboraciones|P||Erwin Hymer Group|presse@hymer.com (su web lo indica para bloggers, cooperaciones de marca y viajes). Mismo grupo que McRent|Fabricante alemán de autocaravanas y campers premium.
-V|Knaus|Autocaravanas y caravanas|PR / Colaboraciones|P|||s.diehl@knaustabbert.de y n.schindler@knaustabbert.de (prensa, en notas de 2021: verificar si siguen vigentes)|Marca alemana de autocaravanas y campers.
-V|Adria|Autocaravanas y campers|PR / Colaboraciones|P||Trigano|No encontrado. En España vende vía distribuidores; mejor DM en Instagram o LinkedIn. Mismo grupo que Benimar (Trigano)|Fabricante esloveno con presencia en España.
-V|Benimar|Autocaravanas|PR / Colaboraciones|P||Trigano|No encontrado email. Mejor DM en Instagram o LinkedIn. Mismo grupo que Adria (Trigano)|Fabricante de autocaravanas con origen en España.
-V|Mercedes-Benz Marco Polo|Furgonetas camper|PR / Embajadores|P|||mercedes-benz.es (verificar)|Camper premium. Competidora de VW California y Ford Nugget.
-V|Fiat Professional (Ducato)|Furgonetas base camper|PR|P|||fiatprofessional.com (verificar)|Base de muchas campers y autocaravanas.
-V|Renault Trafic SpaceNomad|Furgonetas camper|PR|P||Renault Group|renault.es (verificar)|Camper de Renault. Alternativa más accesible.
-V|Outdoorsy|Alquiler campers|Afiliados / Creators|P|||Sin email. Afiliados vía AvantLink/Tradedoubler (sobre todo EE. UU. y Canadá)|Alquiler de campers; más fuerte fuera de España.
-V|Pitchup|Reserva de campings|Afiliados / PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Reservas de campings y glamping en Europa.
-V|Glamping Hub|Reserva de glamping|Afiliados / PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Glamping en todo el mundo. Contenido de escapadas.
-V|Engel|Neveras portátiles|PR / Creators|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Neveras de compresor para furgo. Alternativa a Dometic.
-V|Thetford|WC y equipamiento camper|PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|WC químicos y equipamiento de autocaravana.
-V|Reimo|Accesorios camper|PR|P|||Sin email visible. Formulario de contacto en reimo.com|Accesorios y kits de camperización.
-V|Front Runner|Bacas y equipamiento de techo|PR / Creators|CP|22/10|Dometic Group|Contactado a través de Dometic (contact.eu@dometic.com)|Incluido en la propuesta enviada a Dometic (misma empresa). Bacas y accesorios de overlanding.
-V|iKamper|Tiendas de techo|Creators|CP|23/10||Enviado a: support@ikamper.com|Propuesta enviada, sin respuesta. Tiendas de techo. Muy visual para contenido.
-V|Autohome|Tiendas de techo|PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Marca italiana de tiendas de techo. Alternativa a iKamper.
-C|Vango|Tiendas de campaña|PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Tiendas y material de camping.
-C|MSR|Tiendas y hornillos|PR|P||Cascade Designs|No encontrado email de colabs. MSR y Therm-a-Rest son la misma empresa (Cascade Designs)|Material técnico de camping.
-C|Big Agnes|Tiendas y sacos|PR|P|||Sin email. Programa de embajadores en bigagnes.com/pages/ambassadors|Tiendas ultraligeras para trekking.
-C|Nemo Equipment|Tiendas y sacos|PR|P|||affiliates@nemoequipment.com (programa de afiliados, solo EE. UU. y Canadá)|Material de camping con diseño cuidado.
-C|Helinox|Sillas y mesas plegables|PR / Creators|P|||eu.questions@helinox.com (soporte Europa, general)|Sillas ultraligeras. Muy visuales junto a la furgo.
-C|Snow Peak|Material de camping premium|PR|P|||No encontrado. En Europa su PR e influencers los lleva la agencia All Conditions Media (ACM)|Marca japonesa de camping premium y de diseño.
-C|Primus|Hornillos|PR|P||Fenix Outdoor|Sin email. Programa de influencers con formulario. Ahora pertenece a Silva|Hornillos y cocina de camping.
-C|Trangia|Hornillos|PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Hornillos de alcohol clásicos suecos.
-C|Klean Kanteen|Botellas reutilizables|PR|P|||Sin email de colabs. Afiliados vía AvantLink (kleankanteen.com/pages/affiliate-program); donaciones/patrocinios: donations@kleankanteen.com|Botellas de acero sostenibles.
-C|GSI Outdoors|Vajilla de camping|PR|P|||Sin email. Afiliados en gsioutdoors.com/pages/affiliate-program (AvantLink)|Vajilla y cafeteras de camping.
-C|Light My Fire|Vajilla y encendedores|PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Vajilla colorida de camping, marca sueca.
-C|Ledlenser|Linternas y frontales|PR|P|||info@ledlenser.com (contacto general, sede Alemania). Afiliados UK vía Tradedoubler|Iluminación para camping y rutas.
-C|Fenix|Linternas y frontales|Afiliados|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn|Linternas potentes. Alternativa a Ledlenser y Petzl.
-E|Zendure|Power stations|Afiliados|P|||Sin email. Afiliados vía Daisycon. Ojo: compite con Bluetti|Alternativa a EcoFlow, Bluetti y Jackery. Elegir una.
-C|Grayl|Botellas con filtro|Afiliados / PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn. Ojo: compite con LifeStraw|Botella con filtro. Alternativa a LifeStraw.
-C|Sawyer|Filtros de agua|PR|P|||No encontrado email de colabs. Mejor DM en Instagram o LinkedIn. Ojo: compite con LifeStraw|Filtros ligeros para rutas.
-C|Cadac|Barbacoas portátiles|PR|CP|22/10||Enviado a: info@cadacinternational.com|Propuesta enviada, sin respuesta. Ojo: Cadac es parte de Dometic. Barbacoas de gas para camping.
-C|Ooni|Hornos de pizza portátiles|Afiliados / Creators|P|||affiliates@ooni.com (afiliados y creadores; programa vía Awin)|Pizza en la furgo: contenido divertido y visual.
-C|Exped|Esterillas y sacos|PR|P|||pr@exped.com (prensa, sede en Zúrich)|Esterillas y sacos de dormir.
-C|Therm-a-Rest|Esterillas|PR|P||Cascade Designs|No encontrado email de colabs. Therm-a-Rest y MSR son la misma empresa (Cascade Designs)|Esterillas de referencia para camping.
-R|Rab|Ropa y sacos de montaña|PR|P|||info@equipuk.com (Equip Outdoor Technologies, dueña de Rab y Lowe Alpine; general)|Ropa técnica y sacos de plumas.
-T|Zoleo|Comunicador por satélite|Afiliados|P|||No encontrado. En Europa lo distribuye Global Telesat (GTC); afiliados solo en Norteamérica|Mensajes por satélite en zonas sin cobertura.
-B|Giant|Bicicletas|PR / Embajadores|P|||giant-bicycles.com (verificar)|Uno de los mayores fabricantes de bicis.
-B|Cannondale|Bicicletas|PR / Embajadores|P||Pon Holdings|cannondale.com (verificar)|Marca de bicis de MTB y carretera.
-B|Cube|Bicicletas|PR / Embajadores|P|||cube.eu (verificar)|Marca alemana de bicis con buena relación calidad-precio.
-B|Merida|Bicicletas|PR / Embajadores|P|||merida-bikes.com (verificar)|Bicis de MTB y eMTB.
-B|YT Industries|Bicicletas MTB|PR / Embajadores|P|||yt-industries.com (verificar)|Venta directa de MTB. Marca con mucha imagen.
-B|Rocky Mountain|Bicicletas MTB|PR / Embajadores|P|||bikes.com (verificar)|Marca canadiense de MTB.
-B|Pivot Cycles|Bicicletas MTB|PR / Embajadores|P|||pivotcycles.com (verificar)|MTB premium.
-B|Transition Bikes|Bicicletas MTB|PR / Embajadores|CP|24/10||Enviado a: info@transitionbikes.com|Propuesta enviada, sin respuesta. Marca de MTB con imagen muy desenfadada.
-B|Massi|Bicicletas|PR / Colaboraciones|P|||web oficial / Instagram (verificar)|Marca española de bicis.
-B|Conor|Bicicletas|PR / Colaboraciones|P|||web oficial / Instagram (verificar)|Marca española de bicis accesibles.
-B|Megamo|Bicicletas|PR / Colaboraciones|P|||megamo.com (verificar)|Marca española de bicis y eMTB.
-B|Gobik|Ropa de ciclismo|Embajadores / Creators|P|||gobik@gobik.com (dossier de patrocinio/colaboración, lo evalúa marketing)|Marca española de ropa de ciclismo muy activa con creadores.
-B|Spiuk|Cascos y ropa de ciclismo|PR / Colaboraciones|P|||info@spiuk.com (contacto general)|Marca española de cascos y ropa de ciclismo.
-B|Etxeondo|Ropa de ciclismo|PR / Colaboraciones|P|||etxeondo.com (verificar)|Ropa de ciclismo vasca.
-B|Leatt|Protecciones MTB|PR / Creators|P|||leatt.com (verificar)|Protecciones y cascos de MTB.
-B|Troy Lee Designs|Ropa y cascos MTB|PR / Creators|P|||troyleedesigns.com (verificar)|Ropa y cascos de MTB con mucho estilo.
-B|7mesh|Ropa técnica MTB|PR|P|||7mesh.com (verificar)|Ropa técnica de MTB.
-B|ION|Ropa y protecciones MTB|PR / Creators|P|||ion-products.com (verificar)|Ropa y protecciones de MTB.
-B|Giro|Cascos|PR / Creators|P||Revelyst (antes Vista Outdoor)|giro.com (verificar)|Cascos de MTB y ciclismo.
-B|Smith|Cascos y gafas|PR / Creators|P|||smithoptics.com (verificar)|Cascos y gafas para MTB y montaña.
-B|Maxxis|Neumáticos MTB|PR|P|||maxxis.com (verificar)|Neumáticos de referencia en MTB.
-B|Schwalbe|Neumáticos de bici|PR|P|||schwalbe.com (verificar)|Neumáticos de bici. Alternativa a Maxxis.
-B|Continental|Neumáticos de bici|PR|P|||web oficial (verificar)|Neumáticos de bici y coche.
-B|Michelin|Neumáticos|PR|P|||michelin.es (verificar)|Neumáticos de bici y coche. Puede encajar en furgo y MTB.
-B|Muc-Off|Limpieza y mantenimiento bici|Creators / Afiliados|P|||muc-off.com (verificar)|Muy activa en redes con creadores de ciclismo.
-B|Topeak|Herramientas de bici|PR|P|||topeak.com (verificar)|Herramientas y accesorios para rutas.
-B|Lezyne|Luces y bombas|PR|P|||lezyne.com (verificar)|Accesorios de bici.
-B|Crankbrothers|Pedales y componentes|PR|P|||crankbrothers.com (verificar)|Pedales y ruedas de MTB.
-B|Five Ten|Zapatillas MTB|PR / Creators|P|||adidas.es (Five Ten) (verificar)|Zapatillas de MTB de adidas.
-B|Evoc|Mochilas MTB y bolsas de viaje|PR / Creators|P|||evocsports.com (verificar)|Mochilas de MTB y bolsas para viajar con la bici.
-B|Ergon|Puños y sillines|PR|P|||ergonbike.com (verificar)|Ergonomía para MTB.
-B|Wahoo|Cuentakilómetros GPS|PR / Creators|P|||wahoofitness.com (verificar)|GPS de bici. Alternativa a Garmin.
-B|Bosch eBike Systems|Motores eMTB|PR|P|||bosch-ebike.com (verificar)|Motores de bici eléctrica. Encaja si hace eMTB.
-B|Hope Technology|Componentes MTB|PR|P|||hopetech.com (verificar)|Componentes británicos de MTB.
-R|Haglöfs|Ropa outdoor|PR|P|||haglofs.com (verificar)|Marca sueca de ropa de montaña.
-R|Norrøna|Ropa outdoor premium|PR|P|||norrona.com (verificar)|Marca noruega premium.
-R|Marmot|Ropa outdoor|PR|P|||marmot.com (verificar)|Ropa técnica y sacos.
-R|Mountain Hardwear|Ropa outdoor|PR|P||Columbia Sportswear Company|mountainhardwear.com (verificar)|Ropa técnica de montaña.
-R|Outdoor Research|Ropa outdoor|PR|CR|24/10||Enviado a: info@outdoorresearch.com; sponsorship@outdoorresearch.com|Respondió atención al cliente: las propuestas de patrocinio van al equipo específico de colaboraciones. Pendiente de respuesta de ese equipo. Ropa y accesorios outdoor.
-R|Berghaus|Ropa outdoor|PR|P|||berghaus.com (verificar)|Marca británica de montaña.
-R|Montane|Ropa outdoor|PR|P|||montane.com (verificar)|Ropa técnica ligera.
-R|Ortovox|Ropa de montaña|PR|P||Schwan-STABILO|ortovox.com (verificar)|Ropa de merino y montaña.
-R|Dynafit|Ropa y calzado de montaña|PR|P||Oberalp Group|dynafit.com (verificar)|Trail y montaña.
-R|Salewa|Ropa y calzado de montaña|PR|P||Oberalp Group|salewa.com (verificar)|Marca de montaña de los Dolomitas.
-R|Millet|Ropa de montaña|PR|P||Millet Mountain Group|web oficial (verificar)|Marca francesa de montaña.
-R|Lafuma|Ropa y mobiliario outdoor|PR|P||Millet Mountain Group|lafuma.com (verificar)|Ropa y sillas de camping.
-R|Houdini|Ropa outdoor sostenible|PR|P|||houdinisportswear.com (verificar)|Marca sueca de ropa sostenible.
-R|tentree|Ropa sostenible|Afiliados / Creators|P|||tentree.com (verificar)|Ropa con compromiso de plantación de árboles.
-M|Cotopaxi|Mochilas y ropa outdoor|Afiliados / Creators|P|||cotopaxi.com (verificar)|Mochilas coloridas y marca con valores sociales.
-R|Prana|Ropa outdoor y yoga|PR|P||Columbia Sportswear Company|prana.com (verificar)|Ropa cómoda para outdoor y vida en ruta.
-R|Finisterre|Ropa sostenible de costa|PR|P|||finisterre.com (verificar)|Marca británica de ropa sostenible ligada al mar.
-R|Armedangels|Moda sostenible|PR / Afiliados|P|||armedangels.com (verificar)|Marca alemana de moda sostenible.
-S|Rip Curl|Surf y ropa|PR|P|||ripcurl.com (verificar)|Surf. Encaja si hace contenido de costa.
-R|Vans|Calzado y ropa|PR|P||VF Corporation|vans.es (verificar)|Calzado lifestyle con imagen aventurera.
-R|Birkenstock|Sandalias|PR|P|||birkenstock.com (verificar)|Sandalias cómodas para la vida en furgo.
-R|Havaianas|Chanclas|PR|P|||havaianas.com (verificar)|Chanclas de viaje. Marca brasileña con alcance en LATAM.
-R|Teva|Sandalias outdoor|PR / Creators|P||Deckers Brands|teva.com (verificar)|Sandalias de trekking y río.
-R|Chaco|Sandalias outdoor|PR|P||Wolverine Worldwide|chacos.com (verificar)|Sandalias de aventura. Alternativa a Teva y Keen.
-R|Jack Wolfskin|Ropa y equipo outdoor|PR|P|||jack-wolfskin.com (verificar)|Marca alemana de outdoor.
-R|Scarpa|Calzado de montaña|PR|P|||scarpa.com (verificar)|Calzado técnico de montaña.
-R|Lowa|Botas de montaña|PR|P|||lowa.com (verificar)|Botas de trekking.
-R|Meindl|Botas de montaña|PR|P|||meindl.de (verificar)|Botas de trekking alemanas.
-R|Timberland|Calzado y ropa|PR|P||VF Corporation|timberland.es (verificar)|Botas y ropa con imagen outdoor.
-R|On Running|Calzado de running y trail|PR / Creators|P|||on.com (verificar)|Zapatillas muy populares para viajar y trail.
-R|Altra|Calzado de trail|PR|P||VF Corporation|altrarunning.com (verificar)|Zapatillas de trail con horma ancha.
-R|Chiruca|Botas de montaña|PR / Colaboraciones|P|||chiruca.com (verificar)|Marca española de botas de montaña.
-R|Bestard|Botas de montaña|PR / Colaboraciones|P|||web oficial (verificar)|Marca mallorquina de botas de montaña.
-R|Joma|Ropa y calzado deportivo|PR|P|||joma-sport.com (verificar)|Marca española de deporte.
-R|Garmont|Calzado de montaña|PR|P|||garmont.com (verificar)|Botas de trekking italianas.
-R|Xero Shoes|Calzado barefoot|Afiliados|P|||xeroshoes.com (verificar)|Calzado minimalista. Alternativa a Vivobarefoot.
-R|Be Lenka|Calzado barefoot|Afiliados|P|||belenka.com (verificar)|Calzado barefoot europeo.
-M|Eastpak|Mochilas|PR|P||VF Corporation|eastpak.com (verificar)|Mochilas resistentes y conocidas.
-M|Herschel|Mochilas y bolsas|PR|P|||herschel.com (verificar)|Mochilas y bolsas de viaje de diseño.
-M|Tortuga|Mochilas de viaje|Afiliados|P|||tortugabackpacks.com (verificar)|Mochilas de viaje tamaño cabina.
-M|Nomatic|Mochilas de viaje|Afiliados / Creators|P|||nomatic.com (verificar)|Mochilas y accesorios de viaje.
-M|Aer|Mochilas de viaje|PR|P|||aersf.com (verificar)|Mochilas minimalistas de viaje.
-M|Cabin Zero|Mochilas de cabina|Afiliados|P|||cabinzero.com (verificar)|Mochilas de cabina para volar con poco.
-M|Away|Maletas|PR / Afiliados|P|||awaytravel.com (verificar)|Maletas de diseño.
-M|Samsonite|Maletas|PR|P||Samsonite Group|samsonite.es (verificar)|Maletas clásicas.
-M|Db (Db Journey)|Mochilas y bolsas de viaje|PR / Creators|P|||dbjourney.com (verificar)|Bolsas de viaje y esquí noruegas.
-M|Gregory|Mochilas de trekking|PR|P||Samsonite Group|gregorypacks.com (verificar)|Mochilas técnicas. Alternativa a Osprey y Deuter.
-M|Shimoda|Mochilas de foto|PR / Creators|P|||shimodadesigns.com (verificar)|Mochilas de foto para aventura.
-M|WANDRD|Mochilas de foto y viaje|Afiliados / Creators|P|||wandrd.com (verificar)|Mochilas para creadores que viajan.
-N|Gold Nutrition|Nutrición deportiva|Embajadores / Afiliados|P|||web oficial (verificar)|Nutrición deportiva. Alternativa a HSN y 226ERS.
-T|Samsung|Móviles y almacenamiento|PR / Creators|P||Samsung|comunicacion@samsung.com (prensa Samsung España). En su comunidad dicen que el depto. de marketing estudia propuestas de creadores|Móviles y SSD portátiles.
-T|Google Pixel|Móviles|PR / Creators|P|||store.google.com (verificar)|Cámara de móvil para contenido.
-T|Xiaomi|Tecnología|PR / Creators|P|||mi.com (verificar)|Tecnología accesible. Muy activa con creadores.
-T|Nothing|Móviles y auriculares|PR / Creators|P|||nothing.tech (verificar)|Tecnología con diseño diferente.
-T|Canon|Cámaras|PR / Embajadores|P|||b_ovejerogarcia@canon.es y M_moya@canon.es (prensa Canon España). Ojo: Canon avisa de emails falsos sobre colaboraciones en vídeo; solo son reales los @canon|Cámaras para foto y vídeo.
-T|Nikon|Cámaras|PR / Embajadores|P|||nikon.es (verificar)|Cámaras para foto de naturaleza.
-T|Panasonic Lumix|Cámaras|PR / Embajadores|P|||panasonic.com (verificar)|Cámaras muy usadas para vídeo.
-T|Ricoh GR|Cámaras compactas|PR|P|||web oficial (verificar)|Compacta de culto para fotografía de viaje.
-T|Lomography|Fotografía analógica|Colaboraciones|P|||lomography.com (verificar)|Cámaras y carretes analógicos. Estética de viaje.
-T|Hollyland|Micrófonos inalámbricos|Afiliados / Creators|P|||hollyland.com (verificar)|Micros para vídeo. Alternativa a Rode.
-T|Sennheiser|Audio|PR|P|||sennheiser.com (verificar)|Micrófonos y auriculares.
-T|Moment|Lentes y accesorios móvil|Afiliados / Creators|P|||shopmoment.com (verificar)|Lentes para grabar con el móvil.
-T|Joby|Trípodes|PR|P||Videndum|joby.com (verificar)|Trípodes flexibles para grabar en ruta.
-T|Manfrotto|Trípodes y accesorios|PR|P||Videndum|manfrotto.com (verificar)|Trípodes de referencia.
-T|LaCie|Discos duros|PR|P|||lacie.com (verificar)|Discos resistentes para guardar contenido en viaje.
-T|JBL|Altavoces portátiles|PR / Creators|P||Samsung|jbl.com (verificar)|Altavoces para camping y furgo.
-T|Marshall|Altavoces|PR|P|||marshall.com (verificar)|Altavoces de diseño.
-T|Polar|Relojes deportivos|PR|P|||polar.com (verificar)|Relojes deportivos. Alternativa a Garmin.
-T|Kindle (Amazon)|Lectores electrónicos|Afiliados|P||Amazon|amazon.es (verificar)|Lectura en viaje. Programa de afiliados de Amazon.
-A|Audible|Audiolibros|Afiliados / Creators|P||Amazon|audible.es (verificar)|Audiolibros para las rutas en furgo.
-A|Domestika|Cursos creativos|Afiliados / Creators|P|||Sin email. Afiliados vía Impact (gestiona Acceleration Partners; 40% en nuevos clientes). También se puede proponer un curso como profesora|Plataforma española de cursos creativos. Mucho alcance en LATAM.
-A|Skillshare|Cursos online|Afiliados / Creators|P|||skillshare.com (verificar)|Cursos para creadores de contenido.
-A|Squarespace|Webs para creadores|Afiliados / Creators|P|||squarespace.com (verificar)|Webs y portfolios. Patrocina mucho a creadores.
-N|Aquarius|Bebidas|PR (Coca-Cola España)|P||The Coca-Cola Company|Coca-Cola España (verificar)|Mismo grupo que Fuze Tea: buena puerta de entrada por la relación previa.
-N|Freshly Cosmetics|Cosmética natural|Afiliados / Creators|P|||Sin email de colabs. Programa de afiliados vía Awin (freshlycosmetics.com/es/programa-afiliados)|Marca española de cosmética natural muy activa con creadoras.
-A|Blackmagic (DaVinci Resolve)|Edición de vídeo|PR|P|||blackmagicdesign.com (verificar)|Edición de vídeo profesional.
-A|Proton|VPN y correo privado|Afiliados|P|||proton.me (verificar)|Privacidad online. Alternativa a NordVPN y Surfshark.
-J|Vueling|Aerolínea|PR / Campañas|P||IAG (International Airlines Group)|prensa@vueling.com (prensa). Afiliados vía Tradedoubler. Mismo grupo que Iberia (IAG)|Aerolínea con base en España.
-J|Iberia|Aerolínea|PR / Campañas|P||IAG (International Airlines Group)|prensa@iberia.es (prensa). Mismo grupo que Vueling (IAG)|Vuelos a LATAM.
-J|Air Europa|Aerolínea|PR / Campañas|P|||No encontrado email de prensa o colabs. Mejor LinkedIn (Globalia)|Vuelos a LATAM. Alternativa a Iberia.
-J|Volotea|Aerolínea|PR / Campañas|P|||press@volotea.com (prensa; sale en directorios, no confirmado en su web)|Vuelos entre ciudades medianas de Europa.
-J|Binter|Aerolínea|PR / Campañas|P|||No encontrado email de prensa (solo atención al cliente). Mejor DM en Instagram o LinkedIn|Aerolínea canaria. Encaja con contenido de islas.
-J|Renfe|Tren|PR / Campañas|P|||No encontrado email. Ojo: Renfe sí paga a creadores (consta un pago de 2.100 € + billetes en una colab). Mejor LinkedIn (marketing)|Tren en España. Viajar sin coche.
-J|Iryo|Tren de alta velocidad|PR / Campañas|P|||No encontrado email de prensa o colabs. Mejor DM en Instagram o LinkedIn|Alta velocidad en España. Alternativa a Renfe.
-J|Ouigo|Tren de alta velocidad|PR / Campañas|P|||ouigo.com (verificar)|Alta velocidad low-cost.
-J|Alsa|Autobús|PR / Campañas|P|||No encontrado email de prensa o colabs. Mejor DM en Instagram o LinkedIn|Autobuses en España y Marruecos.
-J|FlixBus|Autobús|Afiliados / PR|P|||Sin email. Afiliados vía Awin, Tradetracker o Travelpayouts (equipo de afiliados en Madrid)|Autobuses baratos por Europa.
-J|Sixt|Alquiler de coches|PR|P|||Sin email. Microsite para creadores sixt.com/relations (verificar que siga activa)|Alquiler de coches y furgonetas.
-J|Centauro|Alquiler de coches|PR|P|||Sin email. Afiliados vía CJ Affiliate (6% del alquiler)|Alquiler de coches español.
-J|DiscoverCars|Comparador de alquiler de coches|Afiliados|P|||Sin email. Programa de afiliados en discovercars.com/affiliate (cookie de 365 días; también en Travelpayouts)|Programa de afiliados para viajeros.
-J|Baleària|Ferries|PR / Campañas|P|||Sin email visible. Sala de prensa en balearia.com/prensa (Directora de Comunicación: Pilar Boix)|Ferries a Baleares y Marruecos. Viajar con la furgo.
-J|Brittany Ferries|Ferries|PR / Campañas|P|||brittany-ferries.es (verificar)|Ferries España–Reino Unido/Irlanda con la furgo.
-J|Direct Ferries|Comparador de ferries|Afiliados|P|||Sin email. Afiliados en directferries.es/afiliados.htm (también Tradedoubler y CJ)|Reservas de ferries por Europa.
-J|Escapada Rural|Casas rurales|PR / Afiliados|P|||Sin email visible. Sala de prensa en escapadarural.com; premian a creadores de turismo rural (Premios EscapadaRural)|Casas rurales en España. Contenido de naturaleza.
-J|Vrbo|Alojamiento vacacional|Afiliados|P|||vrbo.com (verificar)|Alternativa a Airbnb.
-J|eDreams|Agencia de viajes online|Afiliados / PR|P|||Sin email. Afiliados vía Tradedoubler o Travelpayouts|Agencia de viajes de origen español.
-J|Logitravel|Agencia de viajes online|Afiliados / PR|P|||Sin email. Afiliados en logitravel.com/contents/affiliate (también Awin, con condiciones para influencers)|Agencia de viajes española.
-J|Atrápalo|Viajes y ocio|Afiliados / PR|P|||atrapalo.com (verificar)|Viajes y actividades, empresa española.
-J|Tiqets|Entradas a atracciones|Afiliados|P|||Sin email. Afiliados (6-8%) directos o vía Travelpayouts|Entradas a museos y atracciones.
-J|Klook|Tours y actividades|Afiliados / Creators|P|||Sin email. Afiliados en affiliate.klook.com o vía Travelpayouts|Muy fuerte en Asia.
-J|Viator|Tours y actividades|Afiliados|P|||Sin email. Afiliados (8% o más) directos o vía Travelpayouts|Alternativa a GetYourGuide y Civitatis.
-J|Omio|Comparador de transporte|Afiliados|P|||Sin email. Afiliados (6%) vía Travelpayouts|Compara tren, bus y vuelos en Europa.
-J|Trainline|Billetes de tren|Afiliados|P|||Sin email. Afiliados vía Travelpayouts|Billetes de tren en Europa.
-J|Lonely Planet|Guías de viaje|PR / Colaboraciones|P|||web oficial (verificar)|Guías de viaje de referencia.
-A|Wanderlog|App planificación de viajes|Afiliados / Creators|P|||wanderlog.com (verificar)|Planificador de itinerarios. Puede compartir sus rutas.
-J|Cabify|Movilidad|PR|P|||No encontrado email de prensa o colabs. Mejor DM en Instagram o LinkedIn|Empresa española con presencia en LATAM.
-A|Wallapop|Segunda mano|PR / Creators|P|||No encontrado email de prensa o colabs. Mejor DM en Instagram o LinkedIn|Compraventa de segunda mano. Encaja con vida simple y sostenible.
-J|Saily|eSIM|Afiliados|P||Nord Security|Sin email. Saily Creators Program (desde la app) y afiliados 10% vía Awin/Tradedoubler. Mismo grupo que NordVPN; compite con Airalo y Holafly|eSIM de Nord. Compite con Holafly y Airalo.
-F|World Nomads|Seguro de viaje|Afiliados|P|||wnpartners@worldnomads.com (partners; aprueban el contenido antes de publicar). Afiliados vía CJ. Ojo: seguro de viaje, elegir uno|Seguro para viajes de aventura. Compite con IATI y Heymondo.
-F|InterMundial|Seguro de viaje|Afiliados / PR|P|||No encontrado email de colabs. Ojo: seguro de viaje, elegir uno|Aseguradora de viajes española.
-F|Chapka|Seguro de viaje|Afiliados|P|||web oficial (verificar)|Seguros para viajes largos.
-F|Bunq|Banca digital|Afiliados|P|||Sin email. Afiliados en España vía Adtraction o Finance Ads. Ojo: conflicto con BBVA|Banco digital. Ojo: posible conflicto con BBVA.
-D|Turespaña (Spain.info)|Turismo / destino|PR / Campañas|P|||prensa@mintur.es (prensa del Ministerio). Seleccionan influencers vía Consejerías de Turismo en el exterior (programa 'Spain is (Much) More'); para la audiencia LATAM, probar las de México o Buenos Aires|Turismo de España. Campañas dirigidas a LATAM y Europa.
-D|Turismo de Cantabria|Turismo / destino|PR / Campañas|P|||No encontrado email de prensa o colabs (solo contratación de CANTUR). Mejor DM en Instagram o LinkedIn|Naturaleza y costa. Muy buen destino para furgo.
-D|Turismo de Galicia|Turismo / destino|PR / Campañas|P|||No encontrado email. Su promoción 2026 se centra en el Xacobeo 2027; mejor LinkedIn (Axencia Turismo de Galicia)|Naturaleza, costa y Camino de Santiago.
-D|Turismo de Canarias|Turismo / destino|PR / Campañas|P|||promotur@porternovelli.es (agencia de prensa de Turismo de Canarias, en notas de 2016: verificar)|Naturaleza todo el año. Encaja con vanlife en invierno.
-D|Visit Azores|Turismo / destino|PR / Campañas|P|||No encontrado. Probar media@visitportugal.com (Turismo de Portugal)|Naturaleza volcánica en Portugal.
-D|Visit Madeira|Turismo / destino|PR / Campañas|P|||No encontrado. Probar media@visitportugal.com (Turismo de Portugal)|Senderismo y naturaleza en Portugal.
-D|Visit Norway|Turismo / destino|PR / Campañas|P|||Sin email visible. Tienen un Social Media desk específico para creadores (sección en el media centre de visitnorway.com)|Ruta en furgo por fiordos. Muy visual.
-D|Visit Iceland|Turismo / destino|PR / Campañas|P|||Sin email. Formulario de Media Assistance de Business Iceland (prioridad EE. UU., UK, Alemania y Francia; otros países caso a caso)|Destino clásico de vanlife y naturaleza.
-D|Chile Travel|Turismo / destino LATAM|PR / Campañas|P|||No encontrado email actual. Sernatur hace unos 30 viajes de prensa e influencers al año; mejor LinkedIn|Patagonia y naturaleza extrema.
-D|Colombia Travel (ProColombia)|Turismo / destino LATAM|PR / Campañas|P|||No encontrado email. ProColombia tiene presencia en Madrid y España es su primer mercado europeo; mejor LinkedIn|Turismo de Colombia.
-D|Visit Argentina|Turismo / destino LATAM|PR / Campañas|P|||No encontrado email. INPROTUR invita a influencers; mejor LinkedIn|Turismo de Argentina, incluida la Patagonia.
-D|Ecuador Travel|Turismo / destino LATAM|PR / Campañas|P|||No encontrado email de prensa o colabs. Mejor DM en Instagram o LinkedIn|Andes, Amazonía y Galápagos.
-N|Heura|Alimentación vegetal|PR / Creators|P|||info@heurafoods.com (contacto general)|Marca española de alimentación vegetal.
-N|Oatly|Bebidas vegetales|PR|P|||No encontrado email de prensa o colabs. Mejor DM en Instagram o LinkedIn|Bebidas de avena. Marca con tono desenfadado.
-N|Dr. Bronner's|Jabón biodegradable|PR / Afiliados|P|||No encontrado. OJO: hay webs falsas de Dr. Bronner's con emails @outlook.com, no usarlas|Jabón multiusos biodegradable, clásico de vanlife.
-B|Yeti Cycles|Bicicletas MTB|PR / Embajadores|CP|23/10||Enviado a: info@yeticycles.com; media@yeti.com|Propuesta enviada, sin respuesta. Ojo: media@yeti.com es de Yeti (neveras), otra marca. Marca premium de MTB de EE. UU.
-S|Jones Snowboards|Snowboard|PR / Embajadores|CP|23/10||Enviado a: info@jonessnowboards.com|Propuesta enviada, sin respuesta. Snowboard y splitboard.
-S|Burton|Snowboard|PR|CP|22/10||Enviado a: press@burton.com|Propuesta enviada, sin respuesta.
-S|Rossignol|Esquí y snowboard|PR|CP|22/10||Enviado a: egaidioz@rossignol.com; press@rossignol.com|Propuesta enviada, sin respuesta.
-S|Lib Tech|Snowboard|PR|CP|26/10||Enviado a: orders@mervin.com|Propuesta enviada, sin respuesta. Ojo: es el email de pedidos de Mervin; puede que no llegue a marketing.
-S|CAPiTA|Snowboard|PR|CP|22/10||Enviado a: info@capitasnowboarding.com|Propuesta enviada, sin respuesta.
-S|Amplid|Snowboard|PR|CP|22/10||Enviado a: info@amplid.com|Propuesta enviada, sin respuesta.
-V|Storyteller Overland|Campers / overland|PR / Colaboraciones|CP|26/10||Enviado a: info@storytelleroverland.com; Summer@storytelleroverland.com|Propuesta enviada, sin respuesta. Furgonetas camper 4x4 (EE. UU.).
-S|Thurso Surf|Paddle surf|PR / Colaboraciones|CR|24/10||Enviado a: contact@thursosurf.com|Respondieron: agradecen la propuesta, pero indican limitaciones en su programa de colaboraciones.
-S|Starboard|Surf / windsurf / paddle surf|PR|CP|22/10||Enviado a: info@star-board.com; kristina@star-board.com|Propuesta enviada, sin respuesta.
-S|Naish|Kitesurf / wing / paddle surf|PR|CP|22/10||Enviado a: info@naish.com|Propuesta enviada, sin respuesta.
-S|Fanatic|Windsurf / wing / paddle surf|PR|CP|22/10||Enviado a: info@fanatic.com|Propuesta enviada, sin respuesta.
-S|Red Paddle Co|Paddle surf hinchable|PR|CP|22/10||Enviado a: info@redpaddleco.com; team@red-equipment.co.uk|Propuesta enviada, sin respuesta. Verificar team@red-equipment.co.uk: puede ser de Red Equipment, no de Red Paddle Co.
-R|Helikon-Tex|Ropa técnica y equipo|PR|CP|26/10||Enviado a: marketing@helikon-tex.com|Propuesta enviada, sin respuesta.
-R|Outerknown|Ropa sostenible / surf|PR|CP|26/10||Enviado a: press@outerknown.com|Propuesta enviada, sin respuesta.
-S|Alpine Nation|Deportes de invierno / outdoor|Colaboraciones|CP|26/10||Enviado a: collaborations@alpinenation.com|Propuesta enviada, sin respuesta.
-V|Vanketo|Vanlife / camper|Embajadores|CP|26/10||Enviado a: ambassadors@vanketo.co|Propuesta enviada, sin respuesta.
-V|SavvyVan|Vanlife / camper|Partners|CP|26/10||Enviado a: partner@savvyvan.com|Propuesta enviada, sin respuesta.
-</script>
-
-<script type="text/plain" id="dataCol">
-F|BBVA|Banca / Finanzas viajes|Ya colaboró (Cuenta Online Joven)|YC|||Ya tiene relación previa|Ya hizo publi de Cuenta Online Joven BBVA. Posible continuar o ampliar.
-N|Fuze Tea|Bebidas|Ya colaboró|YC||The Coca-Cola Company|Coca-Cola / Fuze Tea España|Colaboración previa de retos viajeros. Posible más campañas.
-E|Bluetti|Energía portátil|Bluetti España|YC|||Ya hay contacto con Bluetti España|Colaboración en curso: han enviado una batería y placas solares.
-R|Shein|Moda / Ropa|Colaboraciones|YC||||Colaboración previa realizada
-S|Grandvalira|Deporte / Turismo / Nieve|Colaboraciones|YC||||Colaboración previa realizada (Pal Arinsal / Grandvalira Bike Park)
-B|Commencal|Bicicletas MTB|Ya colaboró|YC|ago 2026 (finde ~20/08, evento Commencal Village)||Ya tiene relación previa|Colaboró este verano. Respondieron por email: abiertos a colaboraciones puntuales, pero sin apoyo anual continuo. Abiertos a colabs conjuntas de cara al invierno (junto con Grandvalira). Emails usados: info@commencal.com; media@commencal.com; store.us@commencal.com
-</script>
-
-<!-- grupo|marca|nota -->
-<script type="text/plain" id="dataGrp">
-The Coca-Cola Company|Fuze Tea|Ya colaboró: usar esta relación como puerta de entrada al grupo.
-The Coca-Cola Company|Aquarius|Preguntar al contacto de Fuze Tea por el equipo de Aquarius.
-VF Corporation|The North Face|
-VF Corporation|Timberland|
-VF Corporation|Vans|
-VF Corporation|Icebreaker|
-VF Corporation|Eastpak|
-VF Corporation|Altra|
-Amer Sports|Salomon|
-Amer Sports|Arc'teryx|
-Deckers Brands|Hoka|
-Deckers Brands|Teva|
-Columbia Sportswear Company|Columbia|
-Columbia Sportswear Company|Mountain Hardwear|
-Columbia Sportswear Company|Prana|
-Helen of Troy|Osprey|
-Helen of Troy|Hydro Flask|
-Cascade Designs|MSR|
-Cascade Designs|Therm-a-Rest|
-Fenix Outdoor|Fjällräven|No confundir con Fenix (linternas), que es otra empresa.
-Fenix Outdoor|Primus|
-Oberalp Group|Salewa|
-Oberalp Group|Dynafit|
-Schwan-STABILO|Deuter|
-Schwan-STABILO|Ortovox|
-Millet Mountain Group|Millet|
-Millet Mountain Group|Lafuma|Solo la ropa Lafuma; las sillas (Lafuma Mobilier) son otra empresa.
-Wolverine Worldwide|Merrell|Verificar: el grupo ha vendido varias marcas en los últimos años.
-Wolverine Worldwide|Chaco|Verificar que siga en el grupo.
-Revelyst (antes Vista Outdoor)|Fox Racing|Verificar: grupo en reestructuración desde 2025.
-Revelyst (antes Vista Outdoor)|CamelBak|Verificar.
-Revelyst (antes Vista Outdoor)|Giro|Verificar.
-Dometic Group|Dometic|
-Dometic Group|Front Runner|
-Coleman Company|Coleman|
-Coleman Company|Campingaz|Campingaz es la marca europea del grupo Coleman.
-Erwin Hymer Group|Hymer|
-Erwin Hymer Group|McRent|Alquiler de autocaravanas del mismo grupo que Hymer.
-Trigano|Adria|
-Trigano|Benimar|
-Renault Group|Dacia|
-Renault Group|Renault Trafic SpaceNomad|
-Pon Holdings|Santa Cruz Bicycles|
-Pon Holdings|Cannondale|
-Samsonite Group|Samsonite|
-Samsonite Group|Gregory|
-Videndum|Manfrotto|
-Videndum|Joby|
-IAG (International Airlines Group)|Iberia|
-IAG (International Airlines Group)|Vueling|
-Amazon|Kindle (Amazon)|Ambas entran por el programa de afiliados de Amazon.
-Amazon|Audible|
-Nord Security|NordVPN o Surfshark|NordVPN y Surfshark son del mismo grupo: no son alternativas entre sí.
-Nord Security|Saily|
-Samsung|Samsung|
-Samsung|JBL|JBL es de Harman, filial de Samsung.
-</script>
-
+<!-- Datos cargados en tiempo real desde Google Sheets. -->
 <script>
+const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwRJbmv9qlLzWwpJnUK5zL2kWYXnBdez9hISvxTVRyFuO0eGwxplS2oarPmp1WOMTwE/exec";
+function loadDashboardData(done) {
+  const callback = 'pauliSheets_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+  const script = document.createElement('script');
+  let settled = false;
+  const finish = data => {
+    if (settled) return;
+    settled = true; clearTimeout(timer); script.remove(); delete window[callback];
+    if (!data || data.ok !== true) {
+      document.getElementById('meta').textContent = 'No se pudieron cargar los datos de Google Sheets. Recarga la página para reintentar.';
+      return;
+    }
+    done(data);
+  };
+  window[callback] = finish;
+  script.onerror = () => {
+    if (settled) return;
+    settled = true; clearTimeout(timer); delete window[callback]; script.remove();
+    document.getElementById('meta').textContent = 'Error de conexión con Google Sheets. Recarga la página para reintentar.';
+  };
+  const timer = setTimeout(() => {
+    if (settled) return;
+    settled = true; delete window[callback]; script.remove();
+    document.getElementById('meta').textContent = 'La conexión con Google Sheets está tardando demasiado. Recarga la página para reintentar.';
+  }, 15000);
+  script.src = SHEETS_ENDPOINT + '?callback=' + callback + '&_=' + Date.now();
+  document.head.appendChild(script);
+}
+</script>
+<script>
+loadDashboardData(data => {
 (() => {
   const $ = s => document.querySelector(s);
   const NB = '\u00a0';
@@ -872,22 +468,55 @@ Samsung|JBL|JBL es de Harman, filial de Samsung.
   }
   const CANALES = ['Email disponible','Formulario o programa','DM o LinkedIn','Web por verificar','Sin vía clara','Email ya enviado','Relación existente'];
 
-  function parse(id) {
-    return document.getElementById(id).textContent.split('\n').map(l => l.trim()).filter(Boolean).map(l => {
-      const f = l.split('|');
-      const r = {sec:f[0], name:f[1], cat:f[2], contacto:f[3], est:f[4], fecha:f[5] || '', grupo:f[6] || '', email:f[7] || '', notas:f[8] || ''};
-      const m = /^(\d{1,2})\/(\d{1,2})$/.exec(r.fecha);
-      r.date = m ? new Date(2026, +m[2] - 1, +m[1]) : null;
-      r.fechaTxt = r.date ? r.date.getDate() + ' ' + MONTHS[r.date.getMonth()] : r.fecha;
-      const fit = /Fit (\d)\/5/.exec(r.notas); r.fit = fit ? +fit[1] : 0;
-      r.avisos = getAvisos(r);
-      r.canal = getCanal(r);
+  const sectorFor = category => {
+    const c = String(category || '').toLowerCase();
+    if (/camper|vanlife|furgo|caravana|autocaravana/.test(c)) return 'V';
+    if (/energ[ií]a|bater[ií]a|power station|solar|cargador|power bank/.test(c)) return 'E';
+    if (/bicic|mtb|ciclismo|portabicis/.test(c)) return 'B';
+    if (/ropa|calzado|zapato|textil|moda|vestir/.test(c)) return 'R';
+    if (/mochila|bolsa|equipaje|maleta/.test(c)) return 'M';
+    if (/c[aá]mara|foto|v[ií]deo|dron|tecnolog[ií]a|contenido|audio/.test(c)) return 'T';
+    if (/app|aplicaci[oó]n|software|esim|conectividad|vpn|internet|digital/.test(c)) return 'A';
+    if (/seguro|finanza|banca|pago|tarjeta|inversi[oó]n/.test(c)) return 'F';
+    if (/viaje|transporte|alquiler|rutas|movilidad/.test(c)) return 'J';
+    if (/turismo|destino|camping|monta[nñ]a|outdoor|senderismo|hiking|escalada|material/.test(c)) return 'C';
+    if (/surf|nieve|esqu[ií]|snow|agua|acu[aá]tic/.test(c)) return 'S';
+    if (/comida|aliment|bebida|nutrici[oó]n|cuidado|cosm[eé]tica/.test(c)) return 'N';
+    return 'C';
+  };
+  const normalizeStatus = value => {
+    const s = String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    if (s.includes('ya colabor')) return 'YC';
+    if (s.includes('respond')) return 'CR';
+    if (s.includes('contactado')) return 'CP';
+    if (s.includes('no interesado')) return 'NI';
+    return 'P';
+  };
+  function normalizeRows(rows) {
+    return (rows || []).map(row => {
+      const fecha = String(row['Fecha Contacto'] || '').trim();
+      let date = null;
+      let m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(fecha);
+      if (m) date = new Date(+m[1], +m[2] - 1, +m[3]);
+      else {
+        m = /^(\d{1,2})\/(\d{1,2})(?:\/(\d{4}))?$/.exec(fecha);
+        if (m) date = new Date(+(m[3] || 2026), +m[2] - 1, +m[1]);
+      }
+      const r = {
+        sec: sectorFor(row['Categoría']), name: String(row['Marca'] || '').trim(),
+        cat: String(row['Categoría'] || ''), contacto: String(row['Contacto'] || ''),
+        est: normalizeStatus(row['Estado']), fecha, grupo: String(row['Grupo empresarial'] || ''),
+        email: String(row['Email'] || ''), notas: String(row['Notas'] || ''), date,
+        fechaTxt: date ? date.getDate() + ' ' + MONTHS[date.getMonth()] : fecha
+      };
+      const fit = /Fit (\d)\/5/i.exec(r.notas); r.fit = fit ? +fit[1] : 0;
+      r.avisos = getAvisos(r); r.canal = getCanal(r);
       r.search = (r.name + ' ' + r.cat + ' ' + r.contacto + ' ' + r.email + ' ' + r.notas + ' ' + r.grupo + ' ' + (SECTORS[r.sec] || '')).toLowerCase();
       return r;
-    });
+    }).filter(r => r.name);
   }
-  const pot = parse('dataPot');
-  const col = parse('dataCol');
+  const pot = normalizeRows(data.potential);
+  const col = normalizeRows(data.collaborated);
   const all = [...col, ...pot];
   const byName = new Map(all.map(r => [r.name, r]));
   const count = (arr, est) => arr.filter(r => r.est === est).length;
@@ -1051,14 +680,13 @@ Samsung|JBL|JBL es de Harman, filial de Samsung.
   renderAlerts();
 
   /* Estrategia */
-  const PRIOS = [
-    {t:'Marcas de vanlife y campers', w:'Fit perfecto y contenido natural.', b:['Siesta Campers','Furgocasa','People Camper']},
-    {t:'Energía portátil', w:'Muy útil y demostrable en la furgo.', b:['EcoFlow','Bluetti','Goal Zero','BioLite']},
-    {t:'eSIM y conectividad', w:'Problema real de viajeros, alta conversión.', b:['Holafly','Airalo']},
-    {t:'Cámaras y tech de contenido', w:'', b:['Insta360','GoPro','DJI','Peak Design']},
-    {t:'Outdoor gear accesible y premium sostenible', w:'', b:['Decathlon / Quechua','Patagonia']},
-    {t:'Seguros de viaje', w:'', b:['IATI Seguros']}
-  ];
+  const strategyLines = (data.strategy || []).map(x => String(x.section || x.detail || '').trim()).filter(Boolean);
+  const priorityLines = strategyLines.filter(line => /^\d+\./.test(line));
+  const PRIOS = priorityLines.map(line => {
+    const body = line.replace(/^\d+\.\s*/, '');
+    const match = /^(.*?)\s*\(([^)]*)\)\s*(?:→\s*(.*))?$/.exec(body);
+    return {t: match ? match[1].trim() : body, w: match && match[3] ? match[3].trim() : '', b: match ? match[2].split(',').map(x => x.trim()).filter(Boolean) : []};
+  }).filter(p => p.t);
   const brandChip = name => {
     const r = byName.get(name);
     const c = r ? stOf(r).c : 'var(--st-p)';
@@ -1073,6 +701,9 @@ Samsung|JBL|JBL es de Harman, filial de Samsung.
   }).join('');
   $('#prios').addEventListener('click', e => { const b = e.target.closest('[data-open]'); if (b) openBrand(b.dataset.open); });
   $('#collab').innerHTML = col.map(r => '<div class="cb"><b>' + esc(r.name) + '</b><small>' + esc(r.cat) + (r.fecha ? ', ' + esc(r.fecha) : '') + '</small><p>' + esc(r.notas) + '</p></div>').join('');
+  const tipsHeading = strategyLines.findIndex(line => /consejos de outreach/i.test(line));
+  const tips = tipsHeading >= 0 ? strategyLines.slice(tipsHeading + 1).filter(line => /^[-•]/.test(line)).map(line => line.replace(/^[-•]\s*/, '')) : [];
+  $('#tipsList').innerHTML = tips.map(tip => '<li>' + esc(tip) + '</li>').join('');
 
   const canalCounts = CANALES.slice(0, 5).map(c => ({c, n:pot.filter(r => r.est === 'P' && r.canal === c).length})).filter(x => x.n);
   const maxCanal = Math.max(...canalCounts.map(x => x.n));
@@ -1089,10 +720,14 @@ Samsung|JBL|JBL es de Harman, filial de Samsung.
   grow(canalFills);
 
   /* Grupos */
-  const gRows = document.getElementById('dataGrp').textContent.split('\n').map(l => l.trim()).filter(Boolean).map(l => { const f = l.split('|'); return {g:f[0], b:f[1], n:f[2] || ''}; });
+  const gRows = (data.groups || []).map(row => ({
+    g: String(row['Grupo empresarial'] || '').trim(),
+    b: String(row['Marca'] || '').trim(),
+    n: String(row['Estado (de Marcas Potenciales)'] || '').trim()
+  })).filter(x => x.g && x.b);
   const groups = [...new Set(gRows.map(x => x.g))].map(g => {
     const items = gRows.filter(x => x.g === g);
-    const open = items.some(x => { const r = byName.get(x.b); return r && r.est !== 'P'; });
+    const open = items.some(x => { const r = byName.get(x.b); return (r && r.est !== 'P') || /contactado|colabor|respond/i.test(x.n); });
     return {g, items, open};
   }).sort((a, b) => (b.open - a.open) || b.items.length - a.items.length || a.g.localeCompare(b.g, 'es'));
   let gSel = 'todos';
@@ -1214,6 +849,12 @@ Samsung|JBL|JBL es de Harman, filial de Samsung.
   }, {rootMargin:'-40% 0px -55% 0px'});
   document.querySelectorAll('main section').forEach(s => io.observe(s));
 })();
+  const initialSignature = JSON.stringify([data.potential, data.collaborated, data.groups, data.strategy]);
+  setInterval(() => loadDashboardData(next => {
+    const signature = JSON.stringify([next.potential, next.collaborated, next.groups, next.strategy]);
+    if (signature !== initialSignature) window.location.reload();
+  }), 5 * 60 * 1000);
+});
 </script>
 </body>
 </html>
